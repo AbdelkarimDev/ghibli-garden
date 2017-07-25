@@ -10,20 +10,36 @@ block content
         form.form-register(method='POST', action='/auth/sign-up')
             .form-group
                 label Name:
-                input.form-control(name='name', type='text', data-bv-notempty='true'
-                data-bv-notempty-message="The password is required and cannot be empty")
+                input.form-control(name='name', type='text',
+                data-bv-notempty='true'
+                data-bv-notempty-message="The name is required and cannot be empty")
             .form-group
                 label Email:
                 input.form-control(name='email', type='text')
             .form-group
                 label Username:
-                input.form-control(name='username', type='text')
+                input.form-control(name='username', type='text'
+                data-bv-notempty='true'
+                data-bv-notempty-message="The username is required and cannot be empty"
+                data-bv-stringlength="true"
+                data-bv-stringlength-min="4"
+                data-bv-stringlength-max="30"
+                data-bv-stringlength-message="The username must be more than 4 and less than 30 characters long")
             .form-group
                 label Password:
-                input.form-control(name='password', type='password')
+                input.form-control(name='password', type='password'
+                data-bv-notempty='true'
+                data-bv-notempty-message="The password is required and cannot be empty"
+                data-bv-stringlength="true"
+                data-bv-stringlength-min="6"
+                data-bv-stringlength-max="30"
+                data-bv-stringlength-message="The password must be more than 6 and less than 30 characters long")
             .form-group
                 label Confirm:
-                input.form-control(name='password2', type='password')
+                input.form-control(name='password2', type='password',
+                data-bv-different="false"
+                data-bv-different-field="password"
+                data-bv-different-message="The password doesn't match")
             br
             input.btn.btn-primary(type='submit', value='Submit')
 

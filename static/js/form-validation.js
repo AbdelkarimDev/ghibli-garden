@@ -5,9 +5,10 @@ regForm.bootstrapValidator({
         live: 'enabled',
         trigger: null
     });
-console.log("Here")
-regInputs.focusout('click', function (event) {
-    event.preventDefault();
-    const bootstrapValidator = regForm.data('bootstrapValidator');
 
+regInputs.focusin('click', function (event) {
+    event.preventDefault();
+    $('html, body').animate({
+        scrollTop: regForm.offset().top
+    }, 1000);
 });
