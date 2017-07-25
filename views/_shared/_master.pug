@@ -2,14 +2,31 @@ include _nav
 
 <!DOCTYPE html>
 html(lang="en")
-head
-    meta(charset="UTF-8")
-    title Document
-    link(rel="stylesheet", href="/libs/bootstrap/dist/css/bootstrap.min.css")
-    script(src='/libs/jquery/dist/jquery.js')
-    link(rel="stylesheet", href="/static/css/main.css")
-    block head
-body
-    +nav()
-    .container
-        block body
+    head
+        meta(charset='UTF-8')
+        meta(name='viewport', content='width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0')
+        meta(http-equiv='X-UA-Compatible', content='ie=edge')
+        title Ghibli Garden
+        link(rel="stylesheet", href="/libs/bootstrap/dist/css/bootstrap.min.css")
+        link(rel="stylesheet", href="/static/css/main.css")
+
+        // block head
+    body
+        +nav()
+        .main.container
+            != messages('message', locals)
+            if errors
+                each error, i in errors
+                    div.alert.alert-danger #{error.msg}
+            block content
+
+        footer.footer.navbar-fixed-bottom
+            hr
+            .container
+                a(href="http://www.ghibli-museum.jp/en/welcome/", target="_blank")
+                    | Ghibli Museum
+                p.text-muted Telerik Academy Educational Project
+
+        script(src='/libs/jquery/dist/jquery.js')
+        script(src='/libs/bootstrap/dist/js/bootstrap.js')
+        script(src='/static/js/todos.js')
