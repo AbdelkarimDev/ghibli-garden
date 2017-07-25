@@ -23,9 +23,15 @@ mixin nav()
                             li.list-item
                                 a.nav-btn#nav-btn-item-add(href="/items/form")
                                     | Add item
+
+
                 ul.nav.navbar-nav.navbar-right
-                    li.list-item
-                        a(href='/users/register') Register
-                    li.list-item
-                        a(href='/users/login') Login
+                    if user
+                        li.list-item
+                            a(href='/auth/sign-out') Logout, #{user.name}
+                    else
+                        li.list-item
+                            a(href='/auth/sign-up') Register
+                        li.list-item
+                            a(href='/auth/sign-in') Login
 

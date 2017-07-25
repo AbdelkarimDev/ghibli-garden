@@ -5,6 +5,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const express = require('express');
+const session = require('express-session');
+const expressValidator = require('express-validator');
 
 const applyTo = (app) => {
     app.set('view engine', 'pug');
@@ -17,7 +19,30 @@ const applyTo = (app) => {
     const staticsPath = path.join(__dirname, '../../static');
     app.use('/static', express.static(staticsPath));
 
-    app.use(cookieParser('keyboard cat'));
+    app.use(cookieParser('princess mononoke'));
+
+    app.use(require('connect-flash')());
+    app.use((req, res, next) => {
+        res.locals.messages = require('express-messages')(req, res);
+        next();
+    });
+
+    app.use(expressValidator({
+        errorFormatter: (param, msg, value) => {
+            const namespace = param.split('.');
+            const root = namespace.shift();
+            let formParam = root;
+
+            while (namespace.length) {
+                formParam += '[' + namespace.shift() + ']';
+            }
+            return {
+                param: formParam,
+                msg: msg,
+                value: value,
+            };
+        },
+    }));
 };
 
 module.exports = { applyTo };

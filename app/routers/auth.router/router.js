@@ -12,17 +12,19 @@ const attachTo = (app, data) => {
         .get('/sign-in', (req, res) => {
             return controller.getSignInForm(req, res);
         })
-        .post('/sign-out', (req, res) => {
+        .get('/sign-out', (req, res) => {
             return controller.signOut(req, res);
         })
         .post('/sign-up', (req, res) => {
             return controller.signUp(req, res);
         })
-        .post('/sign-in', passport.authenticate('local', {
-            successRedirect: '/',
-            failureRedirect: '/auth/sign-in',
-            failureFlash: true,
-        }));
+        .post('/sign-in', (req, res, next) => {
+            passport.authenticate('local', {
+                successRedirect: '/',
+                failureRedirect: '/auth/sign-in',
+                failureFlash: true,
+            })(req, res, next);
+        });
 
     app.use('/auth', router);
 };

@@ -1,7 +1,31 @@
 extends ../_shared/_master
-block body
-    form(action='/auth/sign-up', method="POST")
-        input.form-control(type="text" name="username" placeholder="Enter username")
-        input.form-control(type="password" name="password" placeholder="Enter password")
-        button.btn.btn-success
-            | Sign Up
+
+block head
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css")
+
+block content
+    div.container.container-register
+        h3
+            | Register
+        form.form-register(method='POST', action='/auth/sign-up')
+            .form-group
+                label Name:
+                input.form-control(name='name', type='text', data-bv-notempty='true'
+                data-bv-notempty-message="The password is required and cannot be empty")
+            .form-group
+                label Email:
+                input.form-control(name='email', type='text')
+            .form-group
+                label Username:
+                input.form-control(name='username', type='text')
+            .form-group
+                label Password:
+                input.form-control(name='password', type='password')
+            .form-group
+                label Confirm:
+                input.form-control(name='password2', type='password')
+            br
+            input.btn.btn-primary(type='submit', value='Submit')
+
+block scripts
+    script(src="/static/js/form-validation.js")

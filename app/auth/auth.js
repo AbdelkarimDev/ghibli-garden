@@ -2,14 +2,25 @@ const session = require('express-session');
 const passport = require('passport');
 const { Strategy } = require('passport-local');
 const MongoStore = require('connect-mongo')(session);
+const bcrypt = require('bcryptjs');
 
 const config = require('../../config');
 
 const applyTo = (app, data) => {
     passport.use(new Strategy((username, password, done) => {
-        data.users.checkPassword(username, password)
-            .then(() => {
-                return data.users.findByUsername(username);
+        data.users.getPassword(username)
+            .then((userPassword) => {
+                bcrypt.compare(password, userPassword, (err, isMatch) => {
+                    if (err) throw err;
+                    if (isMatch) {
+                        return username;
+                    }
+
+                    return done(null, false, { message: 'Wrong password' });
+                });
+            })
+            .then((userName) => {
+                return data.users.findByUsername(userName);
             })
             .then((user) => {
                 done(null, user);
@@ -41,9 +52,13 @@ const applyTo = (app, data) => {
     });
 
     app.use((req, res, next) => {
-        res.locals = {
-            user: req.user,
-        };
+        if (res.locals) {
+            res.locals.user = req.user;
+        } else {
+            res.locals = {
+                user: req.user,
+            };
+        }
 
         next();
     });
