@@ -38,10 +38,10 @@ class TodosController {
         req.sanitizeBody('password').trim();
         req.sanitizeBody('password2').trim();
 
-        req.checkBody('name', 'Invalid name length')
-            .match('/^([a-zA-Z0-9_-]){4,30}$/');
+        req.checkBody('username', 'Invalid username length')
+            .matches(/^([a-zA-Z0-9_-]){4,30}$/);
         req.checkBody('password', 'Invalid password length')
-            .match('/^([a-zA-Z0-9_-]){6,30}$/');
+            .matches(/^([a-zA-Z0-9_-]){6,30}$/);
         req.checkBody('password2', 'Passwords do not match')
             .equals(req.body.password);
         req.checkBody('email', 'Email is not valid').isEmail();

@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const express = require('express');
 const session = require('express-session');
 const expressValidator = require('express-validator');
+const flash = require('connect-flash');
 
 const applyTo = (app) => {
     app.set('view engine', 'pug');
@@ -21,7 +22,7 @@ const applyTo = (app) => {
 
     app.use(cookieParser('princess mononoke'));
 
-    app.use(require('connect-flash')());
+    app.use(flash());
     app.use((req, res, next) => {
         res.locals.messages = require('express-messages')(req, res);
         next();
@@ -43,6 +44,11 @@ const applyTo = (app) => {
             };
         },
     }));
+
+    app.get('*', function(req, res, next) {
+        res.locals.user = req.user || null;
+        next();
+    });
 };
 
 module.exports = { applyTo };

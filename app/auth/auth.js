@@ -26,17 +26,16 @@ const applyTo = (app, data) => {
                 done(null, user);
             })
             .catch((err) => {
-                done(err);
+                done(null, false, { message: err.message });
             });
     }));
 
     app.use(session({
         store: new MongoStore({ url: config.connectionString }),
         secret: config.sessionSecret,
-        resave: true,
-        saveUninitialized: true,
+        resave: false,
+        saveUninitialized: false,
     }));
-
     app.use(passport.initialize());
     app.use(passport.session());
 

@@ -1,6 +1,6 @@
 const BaseData = require('./base/base.data');
 
-const Todo = require('../models/todo.model');
+const Todo = require('../models/film.model');
 
 class TodosData extends BaseData {
     constructor(db) {

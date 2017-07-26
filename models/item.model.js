@@ -11,7 +11,6 @@ class Item {
 
     static toViewModel(model) {
         const viewModel = new Item();
-
         Object.keys(model)
             .forEach((prop) => {
                 viewModel[prop] = model[prop];
