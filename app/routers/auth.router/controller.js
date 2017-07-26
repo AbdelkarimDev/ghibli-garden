@@ -6,6 +6,8 @@ class TodosController {
     }
 
     getSignUpForm(req, res) {
+        // Test
+        this.data.seedDB();
         return res.render('auth/sign-up');
     }
 
