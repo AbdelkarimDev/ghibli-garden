@@ -50,8 +50,84 @@ const getVehiclesInFilm = (film) => {
     return Promise.all(promises);
 };
 
+const trimPeopleJSON = (json) => {
+    if (json.id) {
+        delete json.id;
+    }
+    if (json.films) {
+        delete json.films;
+    }
+    if (json.species) {
+        delete json.species;
+    }
+    if (json.url) {
+        delete json.url;
+    }
+    return json;
+};
+
+const trimSpeciesJSON = (json) => {
+    if (json.id) {
+        delete json.id;
+    }
+    if (json.films) {
+        delete json.films;
+    }
+    if (json.people) {
+        delete json.people;
+    }
+    if (json.url) {
+        delete json.url;
+    }
+    return json;
+};
+
+const trimLocationsJSON = (json) => {
+    if (json.id) {
+        delete json.id;
+    }
+    if (json.films) {
+        delete json.films;
+    }
+    if (json.residents) {
+        delete json.residents;
+    }
+    if (json.url) {
+        delete json.url;
+    }
+    return json;
+};
+
+const trimVehiclesJSON = (json) => {
+    if (json.id) {
+        delete json.id;
+    }
+    if (json.films) {
+        delete json.films;
+    }
+    if (json.pilot) {
+        delete json.pilot;
+    }
+    if (json.url) {
+        delete json.url;
+    }
+    return json;
+};
+
+const trimFilmJSON = (json) => {
+    if (json.id) {
+        delete json.id;
+    }
+    if (json.url) {
+        delete json.url;
+    }
+    return json;
+};
+
 const populateFilms = (films, currentIndex) => {
     if (currentIndex > films.length - 1) {
+        films = films.map(trimFilmJSON);
+        // Mongo Collection "Films" --->
         fs.writeFileSync('../test-json-result.json', JSON.stringify(films));
         return;
     }
@@ -59,23 +135,36 @@ const populateFilms = (films, currentIndex) => {
     const currentFilm = films[currentIndex];
     getPeopleInFilm(currentFilm)
         .then((people) => {
-            currentFilm.people = people;
+            let newPeople;
+            if (Array.isArray(people[0])) {
+                newPeople = people[0].map(trimPeopleJSON);
+            } else {
+                newPeople = people.map(trimPeopleJSON);
+            }
+            currentFilm.people = newPeople;
             return getLocationsInFilm(currentFilm);
         })
         .then((locations) => {
+            if (Array.isArray(locations[0])) {
+                locations = locations[0].map(trimLocationsJSON);
+                if (locations.length > 5) {
+                    locations = locations.slice(0, 6);
+                }
+            }
             currentFilm.locations = locations;
             return getSpeciesInFilm(currentFilm);
         })
         .then((species) => {
+            species = species.map(trimSpeciesJSON);
             currentFilm.species = species;
             return getVehiclesInFilm(currentFilm);
         })
         .then((vehicles) => {
+            if (Array.isArray(vehicles[0])) {
+                vehicles = vehicles[0].map(trimVehiclesJSON);
+            }
             currentFilm.vehicles = vehicles;
             populateFilms(films, ++currentIndex);
-        })
-        .catch((error) => {
-            console.log(error.message());
         });
 };
 
