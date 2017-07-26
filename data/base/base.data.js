@@ -60,6 +60,9 @@ class BaseMongoDbData {
     }
 
     updateById(model) {
+        if (!this._isModelValid(model)) {
+            return Promise.reject('Validation failed!');
+        }
         return this.collection.updateOne({
             _id: model._id,
         }, model);

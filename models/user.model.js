@@ -1,21 +1,28 @@
 const BaseModel = require('./base.model');
 
 class User extends BaseModel {
+    static get ITEMS() {
+        return ['name', 'username', 'email'];
+    }
+
+    static get COLLECTIONS() {
+        return [];
+    }
+
     static isValid(model) {
         if (typeof model !== 'object') {
             return false;
         }
 
-        const props = ['name', 'email', 'username', 'password'];
+        const props = User.ITEMS;
         return User._validateAll(props) &&
-            User._validateMinLength(model, 'username', 4) &&
-            User._validateMinLength(model, 'password', 6);
+            User._validateMinLength(model, 'username', 4);
     }
 
-    static toViewModel(model) {
+    toViewModel(model) {
         const viewModel = new User();
-
-        Object.keys(model)
+        User.ITEMS
+            .concat(User.COLLECTIONS)
             .forEach((prop) => {
                 viewModel[prop] = model[prop];
             });
