@@ -35,7 +35,7 @@ gulp.task('tests:unit', ['pre-test'], () => {
 });
 
 const config = {
-    connectionString: 'mongodb://localhost/items-db-test',
+    connectionString: 'mongodb://localhost/ghibli-db-test',
     port: 3002,
 };
 

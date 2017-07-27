@@ -15,7 +15,7 @@ class User extends BaseModel {
         }
 
         const props = User.ITEMS;
-        return User._validateAll(props) &&
+        return User._validateAll(model, props) &&
             User._validateMinLength(model, 'username', 4);
     }
 

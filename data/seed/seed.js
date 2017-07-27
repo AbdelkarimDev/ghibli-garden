@@ -421,7 +421,7 @@ const seed = () => {
     // generateSpeciesSeed();
     // generateVehiclesSeed();
 
-    
+
 
 };
 

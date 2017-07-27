@@ -1,7 +1,7 @@
 const request = require('supertest');
 
 describe('/items tests', () => {
-    const connectionString = 'mongodb://localhost/items-db-test';
+    const connectionString = 'mongodb://localhost/ghibli-db-test';
     let app = null;
 
     beforeEach(() => {
