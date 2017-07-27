@@ -16,6 +16,10 @@ const getFilms = (url) => {
 
 const getFilmsIn = (json) => {
     const promises = [];
+    if (typeof json.films === 'string') {
+        return getJson(json.films);
+    }
+
     json.films.forEach((p) => {
         promises.push(getJson(p));
     });
@@ -62,6 +66,10 @@ const getVehiclesIn = (json) => {
     return Promise.all(promises);
 };
 
+const getPilotIn = (json) => {
+    return getJson(json.pilot);
+};
+
 const trimPeopleJSON = (json) => {
     if (json.id) {
         delete json.id;
@@ -73,7 +81,7 @@ const trimPeopleJSON = (json) => {
         delete json.species;
     }
     if (json.url) {
-        delete json.url;
+        json.url = '';
     }
     return json;
 };
@@ -89,7 +97,7 @@ const trimSpeciesJSON = (json) => {
         delete json.people;
     }
     if (json.url) {
-        delete json.url;
+        json.url = '';
     }
     return json;
 };
@@ -105,7 +113,7 @@ const trimLocationsJSON = (json) => {
         delete json.residents;
     }
     if (json.url) {
-        delete json.url;
+        json.url = '';
     }
     return json;
 };
@@ -121,14 +129,14 @@ const trimVehiclesJSON = (json) => {
         delete json.pilot;
     }
     if (json.url) {
-        delete json.url;
+        json.url = '';
     }
     return json;
 };
 
 const trimFilmsJSON = (json) => {
     if (json.url) {
-        delete json.url;
+        json.url = '';
     }
     if (json.id) {
         delete json.id;
@@ -151,6 +159,22 @@ const trimFilmsJSON = (json) => {
     return json;
 };
 
+const trimPilotJSON = (json) => {
+    if (json.url) {
+        json.url = '';
+    }
+    if (json.id) {
+        delete json.id;
+    }
+    if (json.films) {
+        delete json.films;
+    }
+    if (json.species) {
+        delete json.species;
+    }
+    return json;
+};
+
 const trimMainFilmJSON = (json) => {
     if (json.rt_score) {
         delete json.rt_score;
@@ -159,7 +183,7 @@ const trimMainFilmJSON = (json) => {
         delete json.id;
     }
     if (json.url) {
-        delete json.url;
+        json.url = '';
     }
     return json;
 };
@@ -169,7 +193,27 @@ const trimMainPeopleJSON = (json) => {
         delete json.id;
     }
     if (json.url) {
-        delete json.url;
+        json.url = '';
+    }
+    return json;
+};
+
+const trimMainSpeciesJSON = (json) => {
+    if (json.id) {
+        delete json.id;
+    }
+    if (json.url) {
+        json.url = '';
+    }
+    return json;
+};
+
+const trimMainVehiclesJSON = (json) => {
+    if (json.id) {
+        delete json.id;
+    }
+    if (json.url) {
+        json.url = '';
     }
     return json;
 };
@@ -218,7 +262,21 @@ const populateFilms = (films, currentIndex) => {
         });
 };
 
+// refactor - >
 const getPeople = (url) => {
+    return getJson(url);
+};
+
+const getLocations = (url) => {
+    return getJson(url);
+};
+
+
+const getSpecies = (url) => {
+    return getJson(url);
+};
+
+const getVehicles = (url) => {
     return getJson(url);
 };
 
@@ -255,17 +313,115 @@ const populatePeople = (people, currentIndex) => {
         });
 };
 
+const populateSpecies = (species, currentIndex) => {
+    if (currentIndex > species.length - 1) {
+        species = species.map(trimMainSpeciesJSON);
+        // Mongo Collection "Species" --->
+        // fs.writeFileSync('../test-json-result.json',
+        // JSON.stringify(species));
+        return;
+    }
+
+    const currentSpecies = species[currentIndex];
+    getFilmsIn(currentSpecies)
+        .then((films) => {
+            if (Array.isArray(films[0])) {
+                films = films[0].map(trimFilmsJSON);
+            } else {
+                films = films.map(trimFilmsJSON);
+            }
+            currentSpecies.films = films;
+            return getPeopleIn(currentSpecies);
+        })
+        .then((people) => {
+            let newPeople;
+            if (Array.isArray(people[0])) {
+                newPeople = people[0].map(trimPeopleJSON);
+            } else {
+                newPeople = people.map(trimPeopleJSON);
+            }
+            currentSpecies.people = newPeople;
+            populateSpecies(species, ++currentIndex);
+        });
+};
+
+const populateVehicles = (vehicles, currentIndex) => {
+    if (currentIndex > vehicles.length - 1) {
+        vehicles = vehicles.map(trimMainVehiclesJSON);
+        // Mongo Collection "Vehicles" --->
+        // fs.writeFileSync('../test-json-result.json',
+        // JSON.stringify(vehicles));
+        return;
+    }
+
+    const currentVehicle = vehicles[currentIndex];
+    getFilmsIn(currentVehicle)
+        .then((films) => {
+            films = trimFilmsJSON(films);
+            currentVehicle.films = films;
+            return getPilotIn(currentVehicle);
+        })
+        .then((pilot) => {
+            pilot = trimPilotJSON(pilot);
+            currentVehicle.pilot = pilot;
+            populateVehicles(vehicles, ++currentIndex);
+        });
+};
+
+const generateFilmsSeed = () => {
+    getFilms(baseURL + 'films')
+     .then((res) => {
+       populateFilms(res, 0);
+     });
+};
+
+const generatePeopleSeed = () => {
+    getPeople(baseURL + 'people')
+        .then((res) => {
+            populatePeople(res, 0);
+        });
+};
+
+const generateLocationsSeed = () => {
+    getLocations(baseURL + 'locations')
+        .then((res) => {
+            res = res.map(trimLocationsJSON);
+            return res;
+        })
+        .then((res) => {
+            // Mongo Collection "Locations" --->
+            // fs.writeFileSync('../test-json-result.json',
+            //     JSON.stringify(res));
+        });
+};
+
+const generateSpeciesSeed = () => {
+    getSpecies(baseURL + 'species')
+        .then((res) => {
+            populateSpecies(res, 0);
+            // fs.writeFileSync('../test-json-result.json',
+            //     JSON.stringify(res));
+        });
+};
+
+const generateVehiclesSeed = () => {
+    getVehicles(baseURL + 'vehicles')
+        .then((res) => {
+            populateVehicles(res, 0);
+            // fs.writeFileSync('../test-json-result.json',
+            // JSON.stringify(res));
+        });
+}
+
 const seed = () => {
     // uncomment each, wait 20-30 sec, get seed data
+    // generateFilmsSeed();
+    // generateLocationsSeed();
+    // generatePeopleSeed();
+    // generateSpeciesSeed();
+    // generateVehiclesSeed();
 
-    // getFilms(baseURL + 'films')
-    //  .then((res) => {
-    //    populateFilms(res, 0);
-    //  });
-    // getPeople(baseURL + 'people')
-    //     .then((res) => {
-    //         populatePeople(res, 0);
-    //     });
+    
 
 };
 
