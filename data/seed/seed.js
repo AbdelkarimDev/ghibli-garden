@@ -218,11 +218,21 @@ const trimMainVehiclesJSON = (json) => {
     return json;
 };
 
-const populateFilms = (films, currentIndex) => {
+const createDBCollection = (name, objects, db) => {
+    if (!Array.isArray(objects)) {
+        throw Error(`Failed to create collection ${name} with seed data,
+         invalid data argument`);
+    }
+    db.collection(name).insertMany(objects);
+};
+
+const populateFilms = (films, currentIndex, db) => {
     if (currentIndex > films.length - 1) {
         films = films.map(trimMainFilmJSON);
         // Mongo Collection "Films" --->
-        fs.writeFileSync('../test-json-result.json', JSON.stringify(films));
+        // fs.writeFileSync('../test-json-result.json', JSON.stringify(films));
+        createDBCollection('films', films, db);
+        // console.log('Done.');
         return;
     }
 
@@ -258,7 +268,7 @@ const populateFilms = (films, currentIndex) => {
                 vehicles = vehicles[0].map(trimVehiclesJSON);
             }
             currentFilm.vehicles = vehicles;
-            populateFilms(films, ++currentIndex);
+            populateFilms(films, ++currentIndex, db);
         });
 };
 
@@ -280,11 +290,13 @@ const getVehicles = (url) => {
     return getJson(url);
 };
 
-const populatePeople = (people, currentIndex) => {
+const populatePeople = (people, currentIndex, db) => {
     if (currentIndex > people.length - 1) {
         people = people.map(trimMainPeopleJSON);
         // Mongo Collection "People" --->
-        fs.writeFileSync('../test-json-result.json', JSON.stringify(people));
+        // fs.writeFileSync('../test-json-result.json', JSON.stringify(people));
+        createDBCollection('people', people, db);
+        // console.log('Done.');
         return;
     }
 
@@ -309,16 +321,18 @@ const populatePeople = (people, currentIndex) => {
                 species = trimSpeciesJSON(species);
             }
             currentPerson.species = species;
-            populatePeople(people, ++currentIndex);
+            populatePeople(people, ++currentIndex, db);
         });
 };
 
-const populateSpecies = (species, currentIndex) => {
+const populateSpecies = (species, currentIndex, db) => {
     if (currentIndex > species.length - 1) {
         species = species.map(trimMainSpeciesJSON);
         // Mongo Collection "Species" --->
         // fs.writeFileSync('../test-json-result.json',
         // JSON.stringify(species));
+        createDBCollection('species', species, db);
+        // console.log('Done.');
         return;
     }
 
@@ -341,16 +355,18 @@ const populateSpecies = (species, currentIndex) => {
                 newPeople = people.map(trimPeopleJSON);
             }
             currentSpecies.people = newPeople;
-            populateSpecies(species, ++currentIndex);
+            populateSpecies(species, ++currentIndex, db);
         });
 };
 
-const populateVehicles = (vehicles, currentIndex) => {
+const populateVehicles = (vehicles, currentIndex, db) => {
     if (currentIndex > vehicles.length - 1) {
         vehicles = vehicles.map(trimMainVehiclesJSON);
         // Mongo Collection "Vehicles" --->
         // fs.writeFileSync('../test-json-result.json',
         // JSON.stringify(vehicles));
+        createDBCollection('vehicles', vehicles, db);
+        // console.log('Done.');
         return;
     }
 
@@ -364,25 +380,25 @@ const populateVehicles = (vehicles, currentIndex) => {
         .then((pilot) => {
             pilot = trimPilotJSON(pilot);
             currentVehicle.pilot = pilot;
-            populateVehicles(vehicles, ++currentIndex);
+            populateVehicles(vehicles, ++currentIndex, db);
         });
 };
 
-const generateFilmsSeed = () => {
+const generateFilmsSeed = (db) => {
     getFilms(baseURL + 'films')
      .then((res) => {
-       populateFilms(res, 0);
+       populateFilms(res, 0, db);
      });
 };
 
-const generatePeopleSeed = () => {
+const generatePeopleSeed = (db) => {
     getPeople(baseURL + 'people')
         .then((res) => {
-            populatePeople(res, 0);
+            populatePeople(res, 0, db);
         });
 };
 
-const generateLocationsSeed = () => {
+const generateLocationsSeed = (db) => {
     getLocations(baseURL + 'locations')
         .then((res) => {
             res = res.map(trimLocationsJSON);
@@ -392,37 +408,43 @@ const generateLocationsSeed = () => {
             // Mongo Collection "Locations" --->
             // fs.writeFileSync('../test-json-result.json',
             //     JSON.stringify(res));
+            createDBCollection('locations', res, db);
+            // console.log('Done.');
         });
 };
 
-const generateSpeciesSeed = () => {
+const generateSpeciesSeed = (db) => {
     getSpecies(baseURL + 'species')
         .then((res) => {
-            populateSpecies(res, 0);
+            populateSpecies(res, 0, db);
             // fs.writeFileSync('../test-json-result.json',
             //     JSON.stringify(res));
         });
 };
 
-const generateVehiclesSeed = () => {
+const generateVehiclesSeed = (db) => {
     getVehicles(baseURL + 'vehicles')
         .then((res) => {
-            populateVehicles(res, 0);
+            populateVehicles(res, 0, db);
             // fs.writeFileSync('../test-json-result.json',
             // JSON.stringify(res));
         });
-}
+};
 
-const seed = () => {
+const seed = (db) => {
     // uncomment each, wait 20-30 sec, get seed data
-    // generateFilmsSeed();
-    // generateLocationsSeed();
-    // generatePeopleSeed();
-    // generateSpeciesSeed();
-    // generateVehiclesSeed();
-
-
-
+    return () => {
+        // generateFilmsSeed(db);
+        // console.log('Seeding films...');
+        // generateLocationsSeed(db);
+        // console.log('Seeding locations...');
+        // generatePeopleSeed(db);
+        // console.log('Seeding people...');
+        // generateSpeciesSeed(db);
+        // console.log('Seeding species...');
+        // generateVehiclesSeed(db);
+        // console.log('Seeding vehicles...');
+    };
 };
 
 module.exports = seed;

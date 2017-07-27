@@ -20,7 +20,7 @@ const init = (db) => {
         persons: new PersonsData(db),
         species: new SpeciesData(db),
         vehicles: new VehiclesData(db),
-        seedDB: seed,
+        seedDB: seed(db),
     });
 };
 
