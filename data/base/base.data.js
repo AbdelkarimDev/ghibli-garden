@@ -78,7 +78,11 @@ class BaseMongoDbData {
     }
 
     _getCollectionName() {
-        return this.ModelClass.name.toLowerCase() + 's';
+        const nameToLower = this.ModelClass.name.toLowerCase();
+        if (nameToLower.endsWith('s')) {
+            return nameToLower;
+        }
+        return nameToLower + 's';
     }
 }
 

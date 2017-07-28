@@ -14,9 +14,9 @@ block content
                         p.card-text
                             | #{film.description}
                     ul.list-group.list-group-flush
-                        li.list-group-item #{film.director}
-                        li.list-group-item #{film.producer}
-                        li.list-group-item #{film.release_date}
+                        li.list-group-item Director: #{film.director}
+                        li.list-group-item Producer: #{film.producer}
+                        li.list-group-item Release Date: #{film.release_date}
                     a.comment-film(href='#/films/#{id}/comment', data-id='#{id}', data-stars='#{stars}')
                         span.glyphicon.glyphicon-comment
                     a.rate-film(href='#/songs/#{id}/rate', data-id='#{id}', data-stars='#{stars}')
