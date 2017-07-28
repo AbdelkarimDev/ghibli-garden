@@ -10,7 +10,8 @@ block content
                     else
                         img.card-img-top.img-responsive.img-thumbnail(src='/static/images/location.jpg', alt='some location image')
                     .card-block
-                        h4.card-title #{location.name}
+                        a(href='/locations/' + location._id)
+                            h4.card-title #{location.name}
                     ul.list-group.list-group-flush
                         li.list-group-item Climate: #{location.climate}
                         li.list-group-item Terrain: #{location.terrain}

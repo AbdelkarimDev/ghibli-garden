@@ -1,0 +1,13 @@
+extends ../_shared/_master
+block content
+    .card
+        if context.url
+            img.card-img-top.img-responsive.img-thumbnail(src='/' + context.url, alt='some location image')
+        else
+            img.card-img-top.img-responsive.img-thumbnail(src='/static/images/location.jpg', alt='some location image')
+        .card-block
+            h4.card-title #{context.name}
+        ul.list-group.list-group-flush
+            li.list-group-item Climate: #{context.climate}
+            li.list-group-item Terrain: #{context.terrain}
+            li.list-group-item Surface Water: #{context.surface_water}
