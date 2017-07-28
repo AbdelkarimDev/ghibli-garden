@@ -19,8 +19,8 @@ const attachTo = (app, data) => {
                     .then(() => {
                         req.flash(
                             'error',
-                            { message: 'You need authentication ' +
-                            'to post comments' }
+                            'You need to be registered ' +
+                            'to post comments'
                         );
 
                         res.redirect('/auth/sign-in');
@@ -39,8 +39,8 @@ const attachTo = (app, data) => {
                 })
                 .then((film) => {
                     const action = `/${id}/comment`;
-                    console.log(film);
-                    console.log(action);
+                    // console.log(film);
+                    // console.log(action);
                     return res.render('comments', {
                         title: film.title,
                         action: action,
@@ -52,33 +52,45 @@ const attachTo = (app, data) => {
                 });
         })
         .post('/:id/comment', (req, res) => {
-            const item = req.body;
+            if (!req.user) {
+                return Promise.resolve()
+                    .then(() => {
+                        req.flash(
+                            'error',
+                            'You need to be registered ' +
+                            'to post comments'
+                        );
 
-            // validate item
-            return data.films.create(item)
-                .then((dbItem) => {
-                    return res.redirect('/items');
+                        res.redirect('/auth/sign-in');
+                    });
+            }
+            const comment = req.body;
+            const id = req.params.id;
+            const username = req.user.username;
+            return data.films.postComment(id, comment, username)
+                .then((msg) => {
+                    req.flash('success', msg);
+                    return res.redirect(`/films/${id}`);
                 })
                 .catch((err) => {
-                    // connect-flash
                     req.flash('error', err);
-                    return res.redirect('/items/form');
-                });
-        })
-        .post('/:id/rate', (req, res) => {
-            const item = req.body;
-
-            // validate item
-            return data.films.create(item)
-                .then((dbItem) => {
-                    return res.redirect('/items');
-                })
-                .catch((err) => {
-                    // connect-flash
-                    req.flash('error', err);
-                    return res.redirect('/items/form');
+                    return res.redirect('/');
                 });
         });
+        // .post('/:id/rate', (req, res) => {
+        //     const item = req.body;
+        //
+        //     // validate item
+        //     return data.films.create(item)
+        //         .then((dbItem) => {
+        //             return res.redirect('/items');
+        //         })
+        //         .catch((err) => {
+        //             // connect-flash
+        //             req.flash('error', err);
+        //             return res.redirect('/items/form');
+        //         });
+        // });
 
     app.use('/films', router);
 };

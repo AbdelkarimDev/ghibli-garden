@@ -1,14 +1,14 @@
-const regForm = $('.container-register form');
-const regInputs = $('.container-register input');
+const validatedForm = $('.container-register form');
+const validatedInputs = $('.container-register input');
 
-regForm.bootstrapValidator({
+validatedForm.bootstrapValidator({
         live: 'enabled',
         trigger: null
     });
 
-regInputs.focusin('click', function (event) {
+validatedInputs.focusin('click', function (event) {
     event.preventDefault();
     $('html, body').animate({
-        scrollTop: regForm.offset().top
+        scrollTop: validatedForm.offset().top
     }, 1000);
 });

@@ -1,20 +1,18 @@
 extends ./_shared/_master
-
-block head
-    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css")
-
 block content
     div.container.container-comment
         h3
             | Leave a comment for #{title}
-        form.form-comment(method='POST', action='' + action)
+        form.form-comment(method='POST', action='/films' + action)
             .comments
                 .form-group
                     label(for='comment') Comment:
-                    textarea#comment.form-control(rows='5')
+                    textarea#comment.form-control(rows='5',
+                    data-bv-notempty='true'
+                    data-bv-notempty-message="The comment form cannot be empty"
+                    data-bv-stringlength="true"
+                    data-bv-stringlength-min="5"
+                    data-bv-stringlength-message="The comment must be at least 5 characters long")
             br
             input.btn.btn-primary(type='submit', value='Submit')
-
-block scripts
-    script(src="/static/js/form-validation.js")
 
