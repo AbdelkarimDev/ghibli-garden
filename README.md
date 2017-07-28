@@ -1,6 +1,6 @@
 Telerik Academy Project, Node.js course
  
-[Studio Ghibli](https://en.wikipedia.org/wiki/Studio_Ghibli)community web site
+[Studio Ghibli](https://en.wikipedia.org/wiki/Studio_Ghibli) community web site
 
 ##  Description:
 _Web applications with Node.js_

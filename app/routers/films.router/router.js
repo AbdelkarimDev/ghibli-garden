@@ -13,11 +13,12 @@ const attachTo = (app, data) => {
             return controller.getById(req, res, id);
         })
         .get('/:id/comment', (req, res) => {
+            const id = req.params.id;
             if (!req.user) {
                 return Promise.resolve()
                     .then(() => {
                         req.flash(
-                            'err',
+                            'error',
                             { message: 'You need authentication ' +
                             'to post comments' }
                         );
@@ -25,22 +26,30 @@ const attachTo = (app, data) => {
                         res.redirect('/auth/sign-in');
                     });
             }
-            return res.render('films/comment');
-        })
-        .get('/:id/rate', (req, res) => {
-            if (!req.user) {
-                return Promise.resolve()
-                    .then(() => {
+            return data.films.findById(id)
+                .then((film) => {
+                    if (!film) {
                         req.flash(
-                            'err',
-                            { message: 'You need authentication ' +
-                            'to rate films' }
+                            'error',
+                            { message: 'No film with given ID exists' }
                         );
-
-                        res.redirect('/auth/sign-in');
+                        res.redirect('/');
+                    }
+                    return film;
+                })
+                .then((film) => {
+                    const action = `/${id}/comment`;
+                    console.log(film);
+                    console.log(action);
+                    return res.render('comments', {
+                        title: film.title,
+                        action: action,
                     });
-            }
-            return res.render('films/rate');
+                })
+                .catch((err) => {
+                    req.flash('error', err.message);
+                    return res.redirect('/');
+                });
         })
         .post('/:id/comment', (req, res) => {
             const item = req.body;

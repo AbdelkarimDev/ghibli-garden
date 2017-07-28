@@ -12,7 +12,7 @@ block content
             li.list-group-item Director: #{context.director}
             li.list-group-item Producer: #{context.producer}
             li.list-group-item Release Date: #{context.release_date}
-        a.comment-film(href='#/films/#{id}/comment', data-id='#{id}', data-stars='#{stars}')
+        a.comment-film(href='/films/' + context._id + '/comment')
             span.glyphicon.glyphicon-comment
-        a.rate-film(href='#/songs/#{id}/rate', data-id='#{id}', data-stars='#{stars}')
+        a.rate-film(href='#/songs/#{id}/rate')
             span.glyphicon.glyphicon-star

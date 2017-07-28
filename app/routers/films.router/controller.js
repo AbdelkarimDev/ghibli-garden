@@ -17,6 +17,7 @@ const init = (data) => {
                     });
                 });
         },
+
     };
 
     return controller;
