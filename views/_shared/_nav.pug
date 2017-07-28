@@ -13,18 +13,9 @@ mixin nav()
                 ul.nav.navbar-nav
                     li.list-item
                         a.nav-btn(href="/") Home
-                    li.list-item.dropdown
-                        a.nav-btn.dropdown-toggle#nav-btn-toggle-items(href="#")
-                            | Items
-                        ul.dropdown-list.list
-                            li.list-item
-                                a.nav-btn#nav-btn-item-all(href="/items")
-                                    | All items
-                            li.list-item
-                                a.nav-btn#nav-btn-item-add(href="/items/form")
-                                    | Add item
-
-
+                    li.list-item
+                        a#nav-btn-films(href="/films")
+                            | Films
                 ul.nav.navbar-nav.navbar-right
                     if user
                         li.list-item

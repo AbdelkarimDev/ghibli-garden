@@ -1,0 +1,25 @@
+extends ../_shared/_master
+block content
+
+    ul#all-films.list-group
+        each film in context
+            li.list-group-item
+                .card
+                    if film.url
+                        img.card-img-top.img-responsive(src='#{film.url}', alt='some film image')
+                    else
+                        img.card-img-top.img-responsive(src='static/images/film.png', alt='some film image')
+                    .card-block
+                        h4.card-title #{film.title}
+                        p.card-text
+                            | #{film.description}
+                    ul.list-group.list-group-flush
+                        li.list-group-item #{film.director}
+                        li.list-group-item #{film.producer}
+                        li.list-group-item #{film.release_date}
+                    a.comment-film(href='#/films/#{id}/comment', data-id='#{id}', data-stars='#{stars}')
+                        span.glyphicon.glyphicon-comment
+                    a.rate-film(href='#/songs/#{id}/rate', data-id='#{id}', data-stars='#{stars}')
+                        span.glyphicon.glyphicon-star
+
+
