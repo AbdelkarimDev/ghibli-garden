@@ -23,6 +23,7 @@ const attachTo = (app, data) => {
                 successRedirect: '/',
                 failureRedirect: '/auth/sign-in',
                 failureFlash: true,
+                successFlash: 'You are logged in!',
             })(req, res, next);
         });
 

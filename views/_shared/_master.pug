@@ -17,6 +17,7 @@ html(lang="en")
             +nav()
 
         .main.container
+            != messages()
             != messages('message', locals)
             if errors
                 each error, i in errors

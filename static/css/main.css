@@ -67,10 +67,16 @@ footer {
     border-color: #ebccd1;
 }
 
-.alert-success_msg{
+.alert-success_msg, #messages {
     color: #3c763d;
     background-color: #dff0d8;
     border-color: #d6e9c6;
+}
+
+#messages ul {
+    list-style-type: none;
+    padding: 15px;
+    color: #3c763d;
 }
 
 .main {
