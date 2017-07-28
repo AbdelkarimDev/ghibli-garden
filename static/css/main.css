@@ -66,7 +66,8 @@ a {
 
 footer {
     text-align: center;
-    background-color: #f8f8f8;
+    background-color: white;
+    padding: 15px;
 }
 
 .alert-error {
@@ -101,7 +102,11 @@ footer {
     padding: 5px;
 }
 
-#all-films {
-    width: 60%;
-    margin: 0 auto;
+#all-films, #all-characters {
+     width: 65%;
+     margin: 0 auto;
+}
+
+footer span {
+    font-size: 12px;
 }

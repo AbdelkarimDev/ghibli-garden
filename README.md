@@ -1,4 +1,4 @@
-Telerik Academy Project, NodeJS course
+Telerik Academy Project, Node.js course
  
 [Studio Ghibli](https://en.wikipedia.org/wiki/Studio_Ghibli) fan site
 

@@ -6,9 +6,9 @@ block content
             li.list-group-item
                 .card
                     if film.url
-                        img.card-img-top.img-responsive(src='#{film.url}', alt='some film image')
+                        img.card-img-top.img-responsive.img-thumbnail(src='#{film.url}', alt='some film image')
                     else
-                        img.card-img-top.img-responsive(src='static/images/film.png', alt='some film image')
+                        img.card-img-top.img-responsive.img-thumbnail(src='static/images/film.png', alt='some film image')
                     .card-block
                         h4.card-title #{film.title}
                         p.card-text
