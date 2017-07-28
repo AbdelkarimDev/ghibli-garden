@@ -1,8 +1,8 @@
 extends ../_shared/_master
 block content
     .card
-        if url
-            img.card-img-top.img-responsive.img-thumbnail(src='#{url}', alt='some film image')
+        if context.url
+            img.card-img-top.img-responsive.img-thumbnail(src='/' + context.url, alt='some film image')
         else
             img.card-img-top.img-responsive.img-thumbnail(src='/static/images/film.png', alt='some film image')
         .card-block

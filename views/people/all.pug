@@ -9,12 +9,10 @@ block content
                         img.card-img-top.img-responsive.img-thumbnail(src='#{person.url}', alt='some character image')
                     else
                         img.card-img-top.img-responsive.img-thumbnail(src='/static/images/person.jpg', alt='some character image')
-                    .card-block
-                        h4.card-title #{person.title}
-                        p.card-text
-                            | #{person.description}
+                    br
                     ul.list-group.list-group-flush
-                        li.list-group-item Character name: #{person.name}
+                        li.list-group-item Character name:
+                            a(href='/people/' + person._id)  #{person.name}
                         li.list-group-item Gender: #{person.gender}
                         li.list-group-item Age: #{person.age}
                         li.list-group-item Eye Color: #{person.eye_color}

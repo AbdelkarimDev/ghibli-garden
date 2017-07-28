@@ -8,6 +8,14 @@ const init = (data) => {
                     });
                 });
         },
+        getById(req, res, id) {
+            return data.persons.findById(id)
+                .then((person) => {
+                    return res.render('people/single', {
+                        context: person,
+                    });
+                });
+        },
     };
 
     return controller;
