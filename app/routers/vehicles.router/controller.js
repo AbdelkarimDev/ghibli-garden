@@ -8,6 +8,14 @@ const init = (data) => {
                     });
                 });
         },
+        getById(req, res, id) {
+            return data.vehicles.findById(id)
+                .then((vehicle) => {
+                    return res.render('vehicles/single', {
+                        context: vehicle,
+                    });
+                });
+        },
     };
 
     return controller;

@@ -1,0 +1,14 @@
+extends ../_shared/_master
+block content
+    .card
+        if context.url
+            img.card-img-top.img-responsive.img-thumbnail(src='/' + context.url, alt='some vehicle image')
+        else
+            img.card-img-top.img-responsive.img-thumbnail(src='/static/images/vehicle.jpeg', alt='some vehicle image')
+        .card-block
+            h4.card-title #{context.name}
+            p.card-text
+                | #{context.description}
+        ul.list-group.list-group-flush
+            li.list-group-item Vehicle Class: #{context.vehicle_class}
+            li.list-group-item Length: #{context.length}
