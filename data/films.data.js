@@ -15,7 +15,7 @@ class FilmsData extends BaseData {
     postComment(id, comment, username) {
         let filmToComment;
         const users = this.db.collection('users');
-        this.findById(id)
+        return this.findById(id)
             .then((film) => {
                 if (!film) {
                     return Promise.reject('Comment failed');
@@ -43,8 +43,11 @@ class FilmsData extends BaseData {
                 });
             })
             .then((user) => {
+                // // tests
+                // console.log(user);
+                // return Promise.reject('Comment failed');
                 const updateFilm = this.collection.updateOne(
-                    { _id: id },
+                    { title: filmToComment.title },
                     filmToComment
                 );
                 if (!user.comments) {

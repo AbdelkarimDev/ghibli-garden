@@ -64,7 +64,7 @@ const attachTo = (app, data) => {
                         res.redirect('/auth/sign-in');
                     });
             }
-            const comment = req.body;
+            const comment = req.body.comment;
             const id = req.params.id;
             const username = req.user.username;
             return data.films.postComment(id, comment, username)
