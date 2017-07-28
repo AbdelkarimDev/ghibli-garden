@@ -1,0 +1,13 @@
+extends ../_shared/_master
+block content
+    .card
+        if context.url
+            img.card-img-top.img-responsive.img-thumbnail(src='/' + context.url, alt='some species image')
+        else
+            img.card-img-top.img-responsive.img-thumbnail(src='/static/images/species.png', alt='some species image')
+        .card-block
+            h4.card-title #{context.name}
+        ul.list-group.list-group-flush
+            li.list-group-item Classification: #{context.classification}
+            li.list-group-item Eye Colors: #{context.eye_colors}
+            li.list-group-item Hair Colors: #{context.hair_colors}

@@ -9,7 +9,8 @@ const attachTo = (app, data) => {
             return controller.getAll(req, res);
         })
         .get('/:id', (req, res) => {
-            // return controller.getAll(req, res);
+            const id = req.params.id;
+            return controller.getById(req, res, id);
         });
 
     app.use('/species', router);

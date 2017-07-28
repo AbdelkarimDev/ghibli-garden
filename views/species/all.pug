@@ -10,7 +10,8 @@ block content
                     else
                         img.card-img-top.img-responsive.img-thumbnail(src='/static/images/species.png', alt='some species image')
                     .card-block
-                        h4.card-title #{species.name}
+                        a(href='/species/' + species._id)
+                            h4.card-title #{species.name}
                     ul.list-group.list-group-flush
                         li.list-group-item Classification: #{species.classification}
                         li.list-group-item Eye Colors: #{species.eye_colors}

@@ -8,6 +8,14 @@ const init = (data) => {
                     });
                 });
         },
+        getById(req, res, id) {
+            return data.species.findById(id)
+                .then((species) => {
+                    return res.render('species/single', {
+                        context: species,
+                    });
+                });
+        },
     };
 
     return controller;
