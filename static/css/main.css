@@ -102,7 +102,7 @@ footer {
     padding: 5px;
 }
 
-#all-films, #all-characters {
+#all-films, #all-characters, #all-locations {
      width: 65%;
      margin: 0 auto;
 }

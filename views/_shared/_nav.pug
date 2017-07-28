@@ -12,13 +12,14 @@ mixin nav()
             #navbar.collapse.navbar-collapse
                 ul.nav.navbar-nav
                     li.list-item
-                        a.nav-btn(href="/") Home
-                    li.list-item
                         a#nav-btn-films(href="/films")
                             | Films
                     li.list-item
                         a#nav-btn-films(href="/people")
                             | People
+                    li.list-item
+                        a#nav-btn-films(href="/locations")
+                            | Locations
                 ul.nav.navbar-nav.navbar-right
                     if user
                         li.list-item
