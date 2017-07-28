@@ -9,6 +9,14 @@ const init = (data) => {
                     });
                 });
         },
+        getById(req, res, id) {
+            return data.films.findById(id)
+                .then((film) => {
+                    return res.render('films/single', {
+                        context: film,
+                    });
+                });
+        },
     };
 
     return controller;

@@ -8,18 +8,15 @@ block content
                     if film.url
                         img.card-img-top.img-responsive.img-thumbnail(src='#{film.url}', alt='some film image')
                     else
-                        img.card-img-top.img-responsive.img-thumbnail(src='static/images/film.png', alt='some film image')
+                        img.card-img-top.img-responsive.img-thumbnail(src='/static/images/film.png', alt='some film image')
                     .card-block
-                        h4.card-title #{film.title}
+                        a(href='/films/' + film._id)
+                            h4.card-title #{film.title}
                         p.card-text
                             | #{film.description}
                     ul.list-group.list-group-flush
                         li.list-group-item Director: #{film.director}
                         li.list-group-item Producer: #{film.producer}
                         li.list-group-item Release Date: #{film.release_date}
-                    a.comment-film(href='#/films/#{id}/comment', data-id='#{id}', data-stars='#{stars}')
-                        span.glyphicon.glyphicon-comment
-                    a.rate-film(href='#/songs/#{id}/rate', data-id='#{id}', data-stars='#{stars}')
-                        span.glyphicon.glyphicon-star
 
 

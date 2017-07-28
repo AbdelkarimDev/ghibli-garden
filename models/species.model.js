@@ -30,6 +30,7 @@ class Species extends BaseModel {
                 viewModel[prop] = model[prop];
             });
 
+        viewModel.id = model._id;
         return viewModel;
     }
 }

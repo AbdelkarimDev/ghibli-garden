@@ -1,0 +1,18 @@
+extends ../_shared/_master
+block content
+    .card
+        if url
+            img.card-img-top.img-responsive.img-thumbnail(src='#{url}', alt='some film image')
+        else
+            img.card-img-top.img-responsive.img-thumbnail(src='/static/images/film.png', alt='some film image')
+        .card-block
+            h4.card-title #{context.title}
+            p.card-text #{context.description}
+        ul.list-group.list-group-flush
+            li.list-group-item Director: #{context.director}
+            li.list-group-item Producer: #{context.producer}
+            li.list-group-item Release Date: #{context.release_date}
+        a.comment-film(href='#/films/#{id}/comment', data-id='#{id}', data-stars='#{stars}')
+            span.glyphicon.glyphicon-comment
+        a.rate-film(href='#/songs/#{id}/rate', data-id='#{id}', data-stars='#{stars}')
+            span.glyphicon.glyphicon-star
