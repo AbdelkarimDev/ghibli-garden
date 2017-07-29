@@ -62,6 +62,25 @@ const attachTo = (app, data) => {
                         res.redirect('/auth/sign-in');
                     });
             }
+
+            req.checkBody('comment', 'Comment cannot be empty').notEmpty();
+            req.sanitizeBody('comment').escape();
+            req.sanitizeBody('comment').trim();
+
+            // console.log(req.params.id);
+            // req.checkParams('id', 'Invalid url param').isAlpha();
+            if (!req.params.id.match(/[a-z0-9]+/i)) {
+                throw Error('Invalid url parameter');
+            }
+            // req.sanitizeParams('id').toBoolean();
+
+            const errors = req.validationErrors();
+
+            if (errors) {
+                return res.render('home', {
+                    errors: errors,
+                });
+            }
             const comment = req.body.comment;
             const id = req.params.id;
             const username = req.user.username;
@@ -116,6 +135,19 @@ const attachTo = (app, data) => {
 
                         res.redirect('/auth/sign-in');
                     });
+            }
+
+            req.checkBody('rating', 'Comment cannot be empty').notEmpty();
+            req.checkBody('rating', 'Has to be between 0 and 10')
+                .matches(/^([0-9]|10)$/);
+            req.sanitizeBody('rating').escape();
+            req.sanitizeBody('rating').trim();
+
+            const errors = req.validationErrors();
+            if (errors) {
+                return res.render('home', {
+                    errors: errors,
+                });
             }
 
             const rating = req.body.rating;

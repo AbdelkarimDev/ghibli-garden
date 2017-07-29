@@ -115,8 +115,7 @@ class FilmsData extends BaseData {
                 return Promise.resolve('Thanks for rating this film!');
             })
             .catch((err) => {
-                return Promise.reject('Sorry, failed to rate film: ' +
-                    err.message);
+                return Promise.reject(err);
             });
     }
 }

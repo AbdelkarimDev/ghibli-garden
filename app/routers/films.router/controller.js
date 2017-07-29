@@ -17,7 +17,7 @@ const init = (data) => {
                 });
         },
         postComment(req, res, id, comment, username) {
-           return data.films.postComment(id, comment, username)
+            return data.films.postComment(id, comment, username)
                 .then((msg) => {
                     req.flash('success', msg);
                     return res.redirect(`/films/${id}`);
