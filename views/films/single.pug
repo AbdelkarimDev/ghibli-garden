@@ -14,5 +14,5 @@ block content
             li.list-group-item Release Date: #{context.release_date}
         a.comment-film(href='/films/' + context._id + '/comment')
             span.glyphicon.glyphicon-comment
-        a.rate-film(href='#/songs/#{id}/rate')
+        a.rate-film(href='/films/' + context._id + '/rate')
             span.glyphicon.glyphicon-star

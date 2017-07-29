@@ -1,0 +1,19 @@
+extends ./_shared/_master
+block content
+    .container
+        .page-header
+            h3
+                | Rate #{title}
+        form.form-comment(method='POST', action='/films' + action)
+            .input-group.spinner
+                input.form-control(type='number', value='5', min='0', max='10', name='rating')
+                .input-group-btn-vertical
+                    button.btn.btn-default(type='button')
+                        i.fa.fa-caret-up
+                    button.btn.btn-default(type='button')
+                        i.fa.fa-caret-down
+            br
+            input.btn.btn-primary(type='submit', value='Submit')
+
+block scripts
+    script(src="/static/js/rating-spinner.js")

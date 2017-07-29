@@ -31,7 +31,7 @@ const attachTo = (app, data) => {
                     if (!film) {
                         req.flash(
                             'error',
-                            { message: 'No film with given ID exists' }
+                            'No film with given ID exists'
                         );
                         res.redirect('/');
                     }
@@ -67,30 +67,66 @@ const attachTo = (app, data) => {
             const comment = req.body.comment;
             const id = req.params.id;
             const username = req.user.username;
-            return data.films.postComment(id, comment, username)
-                .then((msg) => {
-                    req.flash('success', msg);
-                    return res.redirect(`/films/${id}`);
+            return controller.postComment(req, res, id, comment, username);
+        })
+        .get('/:id/rate', (req, res) => {
+            const id = req.params.id;
+            if (!req.user) {
+                return Promise.resolve()
+                    .then(() => {
+                        req.flash(
+                            'error',
+                            'You need to be registered ' +
+                            'to rate films'
+                        );
+
+                        res.redirect('/auth/sign-in');
+                    });
+            }
+            return data.films.findById(id)
+                .then((film) => {
+                    if (!film) {
+                        req.flash(
+                            'error',
+                            'No film with given ID exists'
+                        );
+                        res.redirect('/');
+                    }
+                    return film;
+                })
+                .then((film) => {
+                    const action = `/${id}/rate`;
+                    // console.log(film);
+                    // console.log(action);
+                    return res.render('rating', {
+                        title: film.title,
+                        action: action,
+                    });
                 })
                 .catch((err) => {
-                    req.flash('error', err);
+                    req.flash('error', err.message);
                     return res.redirect('/');
                 });
+        })
+        .post('/:id/rate', (req, res) => {
+            if (!req.user) {
+                return Promise.resolve()
+                    .then(() => {
+                        req.flash(
+                            'error',
+                            'You need to be registered ' +
+                            'to rate a film'
+                        );
+
+                        res.redirect('/auth/sign-in');
+                    });
+            }
+
+            const rating = req.body.rating;
+            const id = req.params.id;
+            const username = req.user.username;
+            return controller.rateFilm(req, res, id, rating, username);
         });
-        // .post('/:id/rate', (req, res) => {
-        //     const item = req.body;
-        //
-        //     // validate item
-        //     return data.films.create(item)
-        //         .then((dbItem) => {
-        //             return res.redirect('/items');
-        //         })
-        //         .catch((err) => {
-        //             // connect-flash
-        //             req.flash('error', err);
-        //             return res.redirect('/items/form');
-        //         });
-        // });
 
     app.use('/films', router);
 };

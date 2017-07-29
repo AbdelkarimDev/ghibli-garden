@@ -76,6 +76,49 @@ class FilmsData extends BaseData {
                     'a comment');
             });
     }
+
+    rateFilm(id, rating, username) {
+        return this.findById(id)
+            .then((film) => {
+                if (!film) {
+                    return Promise.reject('Rate failed');
+                }
+                return film;
+            })
+            .then((film) => {
+                if (!film.rating) {
+                    film.rating = 5;
+                }
+                if (!film.ratedBy) {
+                    film.ratedBy = [];
+                }
+                // if (film.ratedBy.includes(username)) {
+                //     return Promise.reject('Already voted, sorry');
+                // }
+                const rateValue = parseInt(rating, 10);
+                if (rateValue < 0 || rateValue > 10) {
+                    return Promise.reject('Invalid rating provided');
+                }
+
+                film.ratedBy.push(username);
+                const numberOfRates = film.ratedBy.length;
+                const oldRate = film.rating;
+                const newRate =
+                    oldRate + ((rateValue - oldRate) / numberOfRates);
+                film.rating = newRate;
+                return this.collection.updateOne(
+                    { title: film.title },
+                    film
+                );
+            })
+            .then(() => {
+                return Promise.resolve('Thanks for rating this film!');
+            })
+            .catch((err) => {
+                return Promise.reject('Sorry, failed to rate film: ' +
+                    err.message);
+            });
+    }
 }
 
 module.exports = FilmsData;
