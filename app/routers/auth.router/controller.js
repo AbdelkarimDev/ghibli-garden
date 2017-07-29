@@ -1,13 +1,11 @@
 const bcrypt = require('bcryptjs');
 
-class TodosController {
+class AuthController {
     constructor(data) {
         this.data = data;
     }
 
     getSignUpForm(req, res) {
-        // Test
-        this.data.seedDB();
         return res.render('auth/sign-up');
     }
 
@@ -96,7 +94,7 @@ class TodosController {
 }
 
 const init = (data) => {
-    return new TodosController(data);
+    return new AuthController(data);
 };
 
 module.exports = { init };

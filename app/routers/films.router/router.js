@@ -39,8 +39,6 @@ const attachTo = (app, data) => {
                 })
                 .then((film) => {
                     const action = `/${id}/comment`;
-                    // console.log(film);
-                    // console.log(action);
                     return res.render('comments', {
                         title: film.title,
                         action: action,
@@ -96,8 +94,6 @@ const attachTo = (app, data) => {
                 })
                 .then((film) => {
                     const action = `/${id}/rate`;
-                    // console.log(film);
-                    // console.log(action);
                     return res.render('rating', {
                         title: film.title,
                         action: action,

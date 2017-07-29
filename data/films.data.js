@@ -92,9 +92,9 @@ class FilmsData extends BaseData {
                 if (!film.ratedBy) {
                     film.ratedBy = [];
                 }
-                // if (film.ratedBy.includes(username)) {
-                //     return Promise.reject('Already voted, sorry');
-                // }
+                if (film.ratedBy.includes(username)) {
+                    return Promise.reject('Already voted, sorry');
+                }
                 const rateValue = parseInt(rating, 10);
                 if (rateValue < 0 || rateValue > 10) {
                     return Promise.reject('Invalid rating provided');
