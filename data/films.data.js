@@ -27,7 +27,7 @@ class FilmsData extends BaseData {
                     film.comments = [];
                 }
 
-                if (film.comments.length > 7) {
+                if (film.comments.length > 63) {
                     return Promise.reject('Maximum number of comments reached');
                 }
 
@@ -73,7 +73,7 @@ class FilmsData extends BaseData {
             })
             .catch((err) => {
                 return Promise.reject('Sorry, failed to post ' +
-                    'a comment');
+                    'a comment' + err);
             });
     }
 

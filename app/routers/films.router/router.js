@@ -39,7 +39,7 @@ const attachTo = (app, data) => {
                 })
                 .then((film) => {
                     const action = `/${id}/comment`;
-                    return res.render('comments', {
+                    return res.render('comments/form', {
                         title: film.title,
                         action: action,
                     });
@@ -137,7 +137,7 @@ const attachTo = (app, data) => {
                     });
             }
 
-            req.checkBody('rating', 'Comment cannot be empty').notEmpty();
+            req.checkBody('rating', 'Cannot be empty').notEmpty();
             req.checkBody('rating', 'Has to be between 0 and 10')
                 .matches(/^([0-9]|10)$/);
             req.sanitizeBody('rating').escape();

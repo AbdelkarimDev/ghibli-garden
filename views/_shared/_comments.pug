@@ -1,0 +1,9 @@
+.card-columns
+    each comment, index in context.comments
+        .card.comment-card(class=index % 3 == 0 ? "p-3" : "card-primary")
+            span.glyphicon.glyphicon-user
+            .card-block
+                h4.card-title #{comment.user}
+                p.card-text(style="min-width:500px;") #{comment.text}
+                p.card-text
+                    small.text-muted #{comment.date}
