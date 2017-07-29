@@ -2,10 +2,34 @@ const { Router } = require('express');
 
 const attachTo = (app, data) => {
     const router = new Router();
-    const sendPretty = (res, obj) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(obj, null, 3));
-    };
+    const utils = require('../../../../utils/router-utils')(data);
+    // const sendPretty = (res, obj) => {
+    //     res.setHeader('Content-Type', 'application/json');
+    //     res.send(JSON.stringify(obj, null, 3));
+    // };
+    // const validateUrlParam = (res, id) => {
+    //     if (!id.match(/^[a-zA-Z0-9]*$/)) {
+    //              res
+    //             .status(400)
+    //             .send('Invalid url parameter');
+    //     }
+    //
+    //     return Promise.resolve(id);
+    // };
+    // const getSubcollection = (req, res, sub) => {
+    //     validateUrlParam(res, req.params.id)
+    //         .then((id) => {
+    //             return data.films.findById(id);
+    //         })
+    //         .then((film) => {
+    //             sendPretty(res, film[sub]);
+    //         })
+    //         .catch((err) => {
+    //             return res
+    //                 .status(500)
+    //                 .send('Server error:' + err);
+    //         });
+    // };
 
     router
         .get('/', (req, res) => {
@@ -18,7 +42,7 @@ const attachTo = (app, data) => {
 
             return pr
                 .then((films) => {
-                    sendPretty(res, films);
+                    utils.sendPretty(res, films);
                 })
                 .catch((err) => {
                     return res
@@ -27,40 +51,22 @@ const attachTo = (app, data) => {
                 });
         })
         .get('/:id', (req, res) => {
-            const id = req.params.id;
-            if (!req.params.id.match(/[a-z0-9]+/i)) {
-                return res
-                    .status(400)
-                    .send('Invalid url parameter');
-            }
-            return data.films.findById(id)
+            utils.validateUrlParam(res, req.params.id)
+                .then((id) => {
+                    return data.films.findById(id);
+                })
                 .then((film) => {
-                    sendPretty(res, film);
+                    utils.sendPretty(res, film);
                 })
                 .catch((err) => {
                     return res
                         .status(500)
                         .send('Server error:' + err);
                 });
+        })
+        .get('/:id/people', (req, res) => {
+            utils.getSubcollection(req, res, 'films', 'people');
         });
-        // .get('/films/:id/people', (req, res) => {
-        //     const id = req.params.id;
-        //     if (!req.params.id.match(/[a-z0-9]+/i)) {
-        //         return res
-        //             .status(400)
-        //             .send('Invalid url parameter');
-        //     }
-        //     return data.films.findById(id)
-        //         .then((film) => {
-        //             sendPretty(film);
-        //         })
-        //         .catch((err) => {
-        //             return res
-        //                 .status(500)
-        //                 .send('Server error:' + err);
-        //         });
-        // });
-
 
     app.use('/api/films', router);
 };
