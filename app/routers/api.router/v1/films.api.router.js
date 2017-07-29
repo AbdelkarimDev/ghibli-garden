@@ -3,33 +3,6 @@ const { Router } = require('express');
 const attachTo = (app, data) => {
     const router = new Router();
     const utils = require('../../../../utils/router-utils')(data);
-    // const sendPretty = (res, obj) => {
-    //     res.setHeader('Content-Type', 'application/json');
-    //     res.send(JSON.stringify(obj, null, 3));
-    // };
-    // const validateUrlParam = (res, id) => {
-    //     if (!id.match(/^[a-zA-Z0-9]*$/)) {
-    //              res
-    //             .status(400)
-    //             .send('Invalid url parameter');
-    //     }
-    //
-    //     return Promise.resolve(id);
-    // };
-    // const getSubcollection = (req, res, sub) => {
-    //     validateUrlParam(res, req.params.id)
-    //         .then((id) => {
-    //             return data.films.findById(id);
-    //         })
-    //         .then((film) => {
-    //             sendPretty(res, film[sub]);
-    //         })
-    //         .catch((err) => {
-    //             return res
-    //                 .status(500)
-    //                 .send('Server error:' + err);
-    //         });
-    // };
 
     router
         .get('/', (req, res) => {
@@ -66,6 +39,18 @@ const attachTo = (app, data) => {
         })
         .get('/:id/people', (req, res) => {
             utils.getSubcollection(req, res, 'films', 'people');
+        })
+        .get('/:id/species', (req, res) => {
+            utils.getSubcollection(req, res, 'films', 'species');
+        })
+        .get('/:id/locations', (req, res) => {
+            utils.getSubcollection(req, res, 'films', 'locations');
+        })
+        .get('/:id/vehicles', (req, res) => {
+            utils.getSubcollection(req, res, 'films', 'vehicles');
+        })
+        .get('/:id/comments', (req, res) => {
+            utils.getSubcollection(req, res, 'films', 'comments');
         });
 
     app.use('/api/films', router);
