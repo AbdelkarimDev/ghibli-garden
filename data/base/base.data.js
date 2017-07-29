@@ -11,7 +11,10 @@ class BaseMongoDbData {
 
     filterBy(props) {
         return this.collection.find(props)
-            .toArray();
+            .toArray()
+            .catch((err) => {
+                return Promise.reject(err);
+            });
     }
 
     getAll() {
@@ -25,6 +28,9 @@ class BaseMongoDbData {
                 }
 
                 return models;
+            })
+            .catch((err) => {
+                return Promise.reject(err);
             });
     }
 
@@ -35,12 +41,24 @@ class BaseMongoDbData {
         return this.collection.insert(model)
             .then(() => {
                 return model;
+            })
+            .catch((err) => {
+                return Promise.reject(err);
             });
     }
 
     findById(id) {
+        let objId;
+        try {
+            objId = new ObjectID(id);
+        } catch (e) {
+            return Promise.reject(e.message);
+        }
         return this.collection.findOne({
-            _id: new ObjectID(id),
+            _id: objId,
+        })
+        .catch((err) => {
+            return Promise.reject(err);
         });
     }
 
@@ -56,6 +74,9 @@ class BaseMongoDbData {
                 }
 
                 return model;
+            })
+            .catch((err) => {
+                return Promise.reject(err);
             });
     }
 
@@ -65,7 +86,19 @@ class BaseMongoDbData {
         }
         return this.collection.updateOne({
             _id: model._id,
-        }, model);
+        }, model)
+            .catch((err) => {
+                return Promise.reject(err);
+            });
+    }
+
+    findFirst(n) {
+        return this.collection.find()
+            .limit(+n)
+            .toArray()
+            .catch((err) => {
+                return Promise.reject(err);
+            });
     }
 
     _isModelValid(model) {

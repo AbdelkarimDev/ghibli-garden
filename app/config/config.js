@@ -45,10 +45,14 @@ const applyTo = (app) => {
         },
     }));
 
-    app.get('*', function(req, res, next) {
+    app.get('*', (req, res, next) => {
         res.locals.user = req.user || null;
         next();
     });
+
+    // app.use((req, res) => {
+    //     res.status(404).send({ url: req.originalUrl + ' not found' });
+    // });
 };
 
 module.exports = { applyTo };

@@ -70,7 +70,7 @@ const attachTo = (app, data) => {
             // console.log(req.params.id);
             // req.checkParams('id', 'Invalid url param').isAlpha();
             if (!req.params.id.match(/[a-z0-9]+/i)) {
-                throw Error('Invalid url parameter');
+                return res.render('home', 'Invalid url parameter');
             }
             // req.sanitizeParams('id').toBoolean();
 

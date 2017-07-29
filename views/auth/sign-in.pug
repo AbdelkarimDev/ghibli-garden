@@ -3,7 +3,7 @@ extends ../_shared/_master
 block content
     div.container.container-register
         h3 Login
-        form.form-sign-in(method='POST', action='/auth/sign-in')
+        form.form-sign-in(method='POST', action='/auth/sign-in', autocomplete="off")
             .form-group
                 label Username:
                 input.form-control(name='username', type='text')
