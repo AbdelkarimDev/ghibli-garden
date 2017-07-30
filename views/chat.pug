@@ -1,0 +1,17 @@
+extends _shared/_master
+
+block content
+    .container.chat-container
+        ul.pages.list-group
+            li.chat.page.list-group-item
+                .chatArea
+                    ul.messages
+                input.inputMessage(placeholder='Type here...')
+            li.login.page.list-group-item
+                .form.form-inline
+                    h3.title What's your nickname?
+                    input.usernameInput(type='text', maxlength='14')
+
+block scripts
+    script(src="/libs/socket.io-client/dist/socket.io.js")
+    script(src="/static/js/chat.js")

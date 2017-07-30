@@ -11,9 +11,11 @@ async()
     .then((db) => require('./data').init(db))
     .then((data) => require('./app').init(data))
     .then((app) => {
-        app.listen(config.port, () =>
+        const server = app.listen(config.port, () =>
             console.log(`Server running at :${config.port}`));
+        return server;
     })
+    .then((server) => require('./app/chat').init(server))
     .catch((err) => {
         console.log(err);
     });

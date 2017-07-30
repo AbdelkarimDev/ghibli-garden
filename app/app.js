@@ -7,7 +7,7 @@ const init = (data) => {
     require('./auth').applyTo(app, data);
     require('./routers')
         .attachTo(app, data);
-
+    // require('./chat').applyTo(app);
     return Promise.resolve(app);
 };
 
