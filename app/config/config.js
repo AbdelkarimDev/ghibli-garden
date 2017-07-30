@@ -8,6 +8,8 @@ const express = require('express');
 const session = require('express-session');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
+const morgan = require('morgan');
+const fs = require('fs');
 
 const applyTo = (app) => {
     app.set('view engine', 'pug');
@@ -27,6 +29,11 @@ const applyTo = (app) => {
         res.locals.messages = require('express-messages')(req, res);
         next();
     });
+
+    const accessLogStream = fs.createWriteStream(
+        path.join(__dirname, '../../access.log'),
+        { flags: 'a' });
+    app.use(morgan('combined', { stream: accessLogStream }));
 
     app.use(expressValidator({
         errorFormatter: (param, msg, value) => {
