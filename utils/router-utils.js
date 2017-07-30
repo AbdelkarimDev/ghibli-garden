@@ -3,17 +3,15 @@ const routerUtils = (data) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(obj, null, 3));
     };
-    const validateUrlParam = (res, id) => {
+    const validateUrlParam = (id) => {
         if (!id.match(/^[a-zA-Z0-9]*$/)) {
-            res
-                .status(400)
-                .send('Invalid url parameter');
+            return Promise.reject('Invalid url parameter');
         }
 
         return Promise.resolve(id);
     };
     const getSubcollection = (req, res, main, sub) => {
-        validateUrlParam(res, req.params.id)
+        validateUrlParam(req.params.id)
             .then((id) => {
                 return data[main].findById(id);
             })

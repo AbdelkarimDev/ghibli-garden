@@ -24,7 +24,7 @@ const attachTo = (app, data) => {
                 });
         })
         .get('/:id', (req, res) => {
-            utils.validateUrlParam(res, req.params.id)
+            utils.validateUrlParam(req.params.id)
                 .then((id) => {
                     return data.species.findById(id);
                 })
