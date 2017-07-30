@@ -15,7 +15,6 @@ $(function () {
             dataType: 'json',
             success: function (response) {
                 var trHTML = '';
-                console.log(response);
                 if (Array.isArray(response)) {
                     for (var i = 0; i < response.length; i++) {
                         trHTML += '<tr><td>' +

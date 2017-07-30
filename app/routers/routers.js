@@ -14,6 +14,10 @@ const attachTo = (app, data) => {
             const modulePath = path.join(__dirname, file);
             require(modulePath).attachTo(app, data);
         });
+
+    app.use((req, res) => {
+        res.render('404');
+    });
 };
 
 module.exports = { attachTo };
