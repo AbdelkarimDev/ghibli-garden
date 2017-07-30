@@ -4,6 +4,7 @@ const attachTo = (app, data) => {
     require('./v1/locations.api.router').attachTo(app, data);
     require('./v1/species.api.router').attachTo(app, data);
     require('./v1/vehicles.api.router').attachTo(app, data);
+    require('./v1/protected.api.router').attachTo(app, data);
 };
 
 module.exports = {
