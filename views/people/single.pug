@@ -12,3 +12,16 @@ block content
             li.list-group-item Age: #{context.age}
             li.list-group-item Eye Color: #{context.eye_color}
             li.list-group-item Hair Color: #{context.hair_color}
+        a.films-details.pull-right(data-img="/static/images/ghibli.jpeg",
+        data-url="/api/people/" + context._id + '/films',
+        data-title="Films",
+        style="font-size:24px;") Films
+        a.species-details.pull-right(data-img="/static/images/species.png",
+        data-url="/api/people/" + context._id + '/species',
+        data-title="Species",
+        style="font-size:24px;") Species
+
+    include ../_shared/_modal
+
+block scripts
+    script(src="/static/js/details.js")

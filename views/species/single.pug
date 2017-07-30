@@ -11,3 +11,16 @@ block content
             li.list-group-item Classification: #{context.classification}
             li.list-group-item Eye Colors: #{context.eye_colors}
             li.list-group-item Hair Colors: #{context.hair_colors}
+        a.films-details.pull-right(data-img="/static/images/ghibli.jpeg",
+        data-url="/api/species/" + context._id + '/films',
+        data-title="Films",
+        style="font-size:24px;") Films
+        a.people-details.pull-right(data-img="/static/images/person.jpg",
+        data-url="/api/species/" + context._id + '/people',
+        data-title="People",
+        style="font-size:24px;") People
+
+    include ../_shared/_modal
+
+block scripts
+    script(src="/static/js/details.js")

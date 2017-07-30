@@ -12,3 +12,16 @@ block content
         ul.list-group.list-group-flush
             li.list-group-item Vehicle Class: #{context.vehicle_class}
             li.list-group-item Length: #{context.length}
+        a.films-details.pull-right(data-img="/static/images/ghibli.jpeg",
+        data-url="/api/vehicles/" + context._id + '/films',
+        data-title="Films",
+        style="font-size:24px;") Films
+        a.pilot-details.pull-right(data-img="/static/images/person.jpg",
+        data-url="/api/vehicles/" + context._id + '/pilot',
+        data-title="Pilot",
+        style="font-size:24px;") Pilot
+
+    include ../_shared/_modal
+
+block scripts
+    script(src="/static/js/details.js")

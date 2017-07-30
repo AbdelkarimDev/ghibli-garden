@@ -1,6 +1,6 @@
 $(function () {
 
-    $('.people-details, .species-details, .locations-details, .vehicles-details').on('click', function (event) {
+    $('.people-details, .species-details, .locations-details, .vehicles-details, .films-details, .pilot-details').on('click', function (event) {
         event.preventDefault();
         var apiUrl = $(this).data('url');
         var imgUrl = $(this).data('img');
@@ -16,9 +16,15 @@ $(function () {
             success: function (response) {
                 var trHTML = '';
                 console.log(response);
-                for (var i = 0; i < response.length; i++) {
+                if (Array.isArray(response)) {
+                    for (var i = 0; i < response.length; i++) {
+                        trHTML += '<tr><td>' +
+                            (response[i]['name'] ? response[i]['name'] : response[i]['title']) +
+                            '</td></tr>';
+                    }
+                } else {
                     trHTML += '<tr><td>' +
-                        response[i]['name'] +
+                        (response['name'] ? response['name'] : response['title']) +
                         '</td></tr>';
                 }
 
