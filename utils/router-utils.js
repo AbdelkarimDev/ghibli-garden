@@ -3,6 +3,7 @@ const routerUtils = (data) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(obj, null, 3));
     };
+    // refactor to use middleware instead
     const validateUrlParam = (id) => {
         if (!id.match(/^[a-zA-Z0-9]*$/)) {
             return Promise.reject('Invalid url parameter');

@@ -110,73 +110,86 @@ const attachTo = (app, data) => {
                 });
         })
         .get('/:id/rate', (req, res) => {
-            const id = req.params.id;
-            if (!req.user) {
-                return Promise.resolve()
-                    .then(() => {
-                        req.flash(
-                            'error',
-                            'You need to be registered ' +
-                            'to rate films'
-                        );
+            utils.validateUrlParam(req.params.id)
+                .then(() => {
+                    const id = req.params.id;
+                    if (!req.user) {
+                        return Promise.resolve()
+                            .then(() => {
+                                req.flash(
+                                    'error',
+                                    'You need to be registered ' +
+                                    'to rate films'
+                                );
 
-                        res.redirect('/auth/sign-in');
-                    });
-            }
-            return data.films.findById(id)
-                .then((film) => {
-                    if (!film) {
-                        req.flash(
-                            'error',
-                            'No film with given ID exists'
-                        );
-                        res.redirect('/');
+                                res.redirect('/auth/sign-in');
+                            });
                     }
-                    return film;
-                })
-                .then((film) => {
-                    const action = `/${id}/rate`;
-                    return res.render('rating', {
-                        title: film.title,
-                        action: action,
-                    });
+                    return data.films.findById(id)
+                        .then((film) => {
+                            if (!film) {
+                                req.flash(
+                                    'error',
+                                    'No film with given ID exists'
+                                );
+                                res.redirect('/');
+                            }
+                            return film;
+                        })
+                        .then((film) => {
+                            const action = `/${id}/rate`;
+                            return res.render('rating', {
+                                title: film.title,
+                                action: action,
+                            });
+                        })
+                        .catch((err) => {
+                            return Promise.reject(err);
+                        });
                 })
                 .catch((err) => {
-                    req.flash('error', err.message);
+                    req.flash('error', err);
                     return res.redirect('/');
                 });
         })
         .post('/:id/rate', (req, res) => {
-            if (!req.user) {
-                return Promise.resolve()
-                    .then(() => {
-                        req.flash(
-                            'error',
-                            'You need to be registered ' +
-                            'to rate a film'
-                        );
+            utils.validateUrlParam(req.params.id)
+                .then(() => {
+                    if (!req.user) {
+                        return Promise.resolve()
+                            .then(() => {
+                                req.flash(
+                                    'error',
+                                    'You need to be registered ' +
+                                    'to rate a film'
+                                );
 
-                        res.redirect('/auth/sign-in');
-                    });
-            }
+                                res.redirect('/auth/sign-in');
+                            });
+                    }
 
-            req.checkBody('rating', 'Cannot be empty').notEmpty();
-            req.checkBody('rating', 'Has to be between 0 and 10')
-                .matches(/^([0-9]|10)$/);
-            req.sanitizeBody('rating').escape();
-            req.sanitizeBody('rating').trim();
+                    req.checkBody('rating', 'Cannot be empty').notEmpty();
+                    req.checkBody('rating', 'Has to be between 0 and 10')
+                        .matches(/^([0-9]|10)$/);
+                    req.sanitizeBody('rating').escape();
+                    req.sanitizeBody('rating').trim();
 
-            const errors = req.validationErrors();
-            if (errors) {
-                return res.render('home', {
-                    errors: errors,
+                    const errors = req.validationErrors();
+                    if (errors) {
+                        return res.render('home', {
+                            errors: errors,
+                        });
+                    }
+
+                    const rating = req.body.rating;
+                    const id = req.params.id;
+                    const username = req.user.username;
+                    return controller.rateFilm(req, res, id, rating, username);
+                })
+                .catch((err) => {
+                    req.flash('error', err);
+                    return res.redirect('/');
                 });
-            }
-
-            const rating = req.body.rating;
-            const id = req.params.id;
-            const username = req.user.username;
-            return controller.rateFilm(req, res, id, rating, username);
         });
 
     app.use('/films', router);
