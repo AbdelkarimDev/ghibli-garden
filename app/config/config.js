@@ -9,6 +9,7 @@ const session = require('express-session');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const morgan = require('morgan');
+const winston = require('winston');
 const fs = require('fs');
 
 const applyTo = (app) => {
@@ -34,6 +35,10 @@ const applyTo = (app) => {
         path.join(__dirname, '../../access.log'),
         { flags: 'a' });
     app.use(morgan('combined', { stream: accessLogStream }));
+
+    winston.handleExceptions(new winston.transports.File(
+            { filename: path.join(__dirname, '../../exceptions.log') }
+        ));
 
     app.use(expressValidator({
         errorFormatter: (param, msg, value) => {
