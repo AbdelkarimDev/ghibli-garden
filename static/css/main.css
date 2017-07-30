@@ -62,6 +62,7 @@ img {
 
 a {
     text-decoration: none;
+    cursor: pointer;
 }
 
 footer {
@@ -156,4 +157,24 @@ input[type=number]::-webkit-outer-spin-button {
 
 .comment-card {
     display: inline-block;
+}
+
+/* modal css --START*/
+
+
+tbody > tr {
+    cursor: pointer;
+}
+
+.result{
+    margin-top:20px;
+}
+/* modal css --END*/
+
+.people-details,
+.species-details,
+.locations-details,
+.vehicles-details
+{
+    margin-left: 10px;
 }

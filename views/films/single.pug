@@ -12,14 +12,33 @@ block content
             li.list-group-item Director: #{context.director}
             li.list-group-item Producer: #{context.producer}
             li.list-group-item Release Date: #{context.release_date}
-        a.comment-film(href='/films/' + context._id + '/comment')
+        a.comment-film(href='/films/' + context._id + '/comment', style="font-size:32px;")
             span.glyphicon.glyphicon-comment
         a.rate-film(href='/films/' + context._id + '/rate')
-            span.glyphicon.glyphicon-star
+            span.glyphicon.glyphicon-star(style="font-size:32px;") #{context.rating}
+        a.vehicles-details.pull-right(data-img="/static/images/vehicle.jpeg",
+        data-url="/api/films/" + context._id + '/vehicles',
+        data-title="Vehicles",
+        style="font-size:24px;") Vehicles
+        a.locations-details.pull-right(data-img="/static/images/location.jpg",
+        data-url="/api/films/" + context._id + '/locations',
+        data-title="Locations",
+        style="font-size:24px;") Locations
+        a.species-details.pull-right(data-img="/static/images/species.png",
+        data-url="/api/films/" + context._id + '/species',
+        data-title="Species",
+        style="font-size:24px;") Species
+        a.people-details.pull-right(data-img="/static/images/person.jpg",
+        data-url="/api/films/" + context._id + '/people',
+        data-title="People",
+        style="font-size:24px;") People
     br
 
     if context.comments
         include ../_shared/_comments
 
+    include ../_shared/_modal
+
 block scripts
     script(src="/static/js/film-smooth-scroll.js")
+    script(src="/static/js/details.js")

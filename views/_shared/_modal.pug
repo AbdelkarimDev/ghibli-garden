@@ -1,0 +1,32 @@
+// Modal
+#myModal.modal(tabindex='-1', role='dialog', aria-labelledby='myModalLabel', aria-hidden='true')
+    .modal-dialog
+        .modal-content
+            .modal-header
+                button.close(type='button', data-dismiss='modal', aria-hidden='true')
+                    i.text-danger.fa.fa-times
+                h4#myModalLabel.modal-title
+                    strong Details
+            .modal-body
+                table.table-striped.pull-left.col-md-8.details-table
+                    tbody.details-body
+                        //tr
+                        //    td.h6
+                        //        strong Item 1
+                        //    td
+                        //    td.h5 Item 2
+                        //tr
+                        //    td.h6
+                        //        strong Item 1
+                        //    td
+                        //    td.h5 Item 2
+                .col-md-4
+                    img.details-image.img-thumbnail(src='/static/images/ghibli.jpeg', alt='ghibli image')
+                .clearfix
+            .modal-footer
+                .text-right.pull-right.col-md-3
+                    | Studio
+                    br
+                    span.h3.text-muted
+                        strong Ghibli
+// end Modal
