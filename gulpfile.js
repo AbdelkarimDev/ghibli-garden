@@ -4,41 +4,6 @@ const gulp = require('gulp');
 const istanbul = require('gulp-istanbul');
 const mocha = require('gulp-mocha');
 
-// gulp.task('data:seedf', () => {
-//     const database = require(path.join(__dirname, '/db/index.js'));
-//     const dt = require(path.join(__dirname, '/data/index.js')).init(database);
-//     dt.seedDB().generateFilmsSeed(database);
-//     console.log('Flim seed done.');
-// });
-//
-// gulp.task('data:seedp', () => {
-//     const database = require(path.join(__dirname, '/db/index.js'));
-//     const dt = require(path.join(__dirname, '/data/index.js')).init(database);
-//     dt.seedDB().generatePeopleSeed(database);
-//     console.log('People seed done.');
-// });
-//
-// gulp.task('data:seeds', () => {
-//     const database = require(path.join(__dirname, '/db/index.js'));
-//     const dt = require(path.join(__dirname, '/data/index.js')).init(database);
-//     dt.seedDB().generateSpeciesSeed(database);
-//     console.log('Species seed done.');
-// });
-//
-// gulp.task('data:seedl', () => {
-//     const database = require(path.join(__dirname, '/db/index.js'));
-//     const dt = require(path.join(__dirname, '/data/index.js')).init(database);
-//     dt.seedDB().generateLocationsSeed(database);
-//     console.log('Locations seed done.');
-// });
-//
-// gulp.task('data:seedv', () => {
-//     const database = require(path.join(__dirname, '/db/index.js'));
-//     const dt = require(path.join(__dirname, '/data/index.js')).init(database);
-//     dt.seedDB().generateVehiclesSeed(database);
-//     console.log('Locations seed done.');
-// });
-
 gulp.task('server:start', () => {
     return require('./server');
 });
@@ -80,10 +45,11 @@ gulp.task('test-server:start', () => {
         .then((db) => require('./data').init(db))
         .then((data) => require('./app').init(data))
         .then((app) => {
-            app.listen(
-                config.port,
-                () => console.log(`Magic happends at :${config.port}`));
-        });
+            const server = app.listen(config.port, () =>
+                console.log(`Test server running at :${config.port}`));
+            return server;
+        })
+        .then((server) => require('./app/chat').init(server));
 });
 
 const { MongoClient } = require('mongodb');
@@ -96,7 +62,7 @@ gulp.task('test-server:stop', () => {
 });
 
 gulp.task('tests:browser', ['test-server:start'], () => {
-    return gulp.src('./test/browser/items/create-item.js')
+    return gulp.src('./test/browser/navigation/nav-tests.js')
         .pipe(mocha({
             reporter: 'nyan',
             timeout: 10000,
