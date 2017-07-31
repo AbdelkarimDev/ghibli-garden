@@ -68,6 +68,46 @@ const attachTo = (app, data) => {
                         });
                 }
             });
+        })
+        .post('/seedf', (req, res) => {
+            // for seed after deploy on Ubuntu server
+            // curl -X POST https://example.com/..
+
+            const seed = data.seedDB;
+            seed.generateFilmsSeed(seed.db);
+            res.send('Seeding films ...');
+        })
+        .post('/seedp', (req, res) => {
+            // for seed after deploy on Ubuntu server
+            // curl -X POST https://example.com/..
+
+            const seed = data.seedDB;
+            seed.generatePeopleSeed(seed.db);
+            res.send('Seeding people ...');
+        })
+        .post('/seeds', (req, res) => {
+            // for seed after deploy on Ubuntu server
+            // curl -X POST https://example.com/..
+
+            const seed = data.seedDB;
+            seed.generateSpeciesSeed(seed.db);
+            res.send('Seeding species ...');
+        })
+        .post('/seedl', (req, res) => {
+            // for seed after deploy on Ubuntu server
+            // curl -X POST https://example.com/..
+
+            const seed = data.seedDB;
+            seed.generateLocationsSeed(seed.db);
+            res.send('Seeding locations ...');
+        })
+        .post('/seedv', (req, res) => {
+            // for seed after deploy on Ubuntu server
+            // curl -X POST https://example.com/..
+
+            const seed = data.seedDB;
+            seed.generateVehiclesSeed(seed.db);
+            res.send('Seeding vehicles ...');
         });
 
     app.use('/api/', router);

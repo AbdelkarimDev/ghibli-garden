@@ -26,7 +26,7 @@ const applyTo = (app, data) => {
                 done(null, user);
             })
             .catch((err) => {
-                done(null, false, { message: err.message });
+                done(null, false, { message: err });
             });
     }));
 
@@ -36,6 +36,7 @@ const applyTo = (app, data) => {
         resave: false,
         saveUninitialized: false,
     }));
+
     app.use(passport.initialize());
     app.use(passport.session());
 

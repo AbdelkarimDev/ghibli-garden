@@ -31,10 +31,10 @@ const applyTo = (app) => {
         next();
     });
 
-    const accessLogStream = fs.createWriteStream(
-        path.join(__dirname, '../../access.log'),
-        { flags: 'a' });
-    app.use(morgan('combined', { stream: accessLogStream }));
+    // const accessLogStream = fs.createWriteStream(
+    //     path.join(__dirname, '../../access.log'),
+    //     { flags: 'a' });
+    // app.use(morgan('combined', { stream: accessLogStream }));
 
     winston.handleExceptions(new winston.transports.File(
             { filename: path.join(__dirname, '../../exceptions.log') }

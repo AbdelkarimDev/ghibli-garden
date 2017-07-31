@@ -4,6 +4,41 @@ const gulp = require('gulp');
 const istanbul = require('gulp-istanbul');
 const mocha = require('gulp-mocha');
 
+// gulp.task('data:seedf', () => {
+//     const database = require(path.join(__dirname, '/db/index.js'));
+//     const dt = require(path.join(__dirname, '/data/index.js')).init(database);
+//     dt.seedDB().generateFilmsSeed(database);
+//     console.log('Flim seed done.');
+// });
+//
+// gulp.task('data:seedp', () => {
+//     const database = require(path.join(__dirname, '/db/index.js'));
+//     const dt = require(path.join(__dirname, '/data/index.js')).init(database);
+//     dt.seedDB().generatePeopleSeed(database);
+//     console.log('People seed done.');
+// });
+//
+// gulp.task('data:seeds', () => {
+//     const database = require(path.join(__dirname, '/db/index.js'));
+//     const dt = require(path.join(__dirname, '/data/index.js')).init(database);
+//     dt.seedDB().generateSpeciesSeed(database);
+//     console.log('Species seed done.');
+// });
+//
+// gulp.task('data:seedl', () => {
+//     const database = require(path.join(__dirname, '/db/index.js'));
+//     const dt = require(path.join(__dirname, '/data/index.js')).init(database);
+//     dt.seedDB().generateLocationsSeed(database);
+//     console.log('Locations seed done.');
+// });
+//
+// gulp.task('data:seedv', () => {
+//     const database = require(path.join(__dirname, '/db/index.js'));
+//     const dt = require(path.join(__dirname, '/data/index.js')).init(database);
+//     dt.seedDB().generateVehiclesSeed(database);
+//     console.log('Locations seed done.');
+// });
+
 gulp.task('server:start', () => {
     return require('./server');
 });

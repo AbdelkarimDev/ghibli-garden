@@ -232,7 +232,7 @@ const populateFilms = (films, currentIndex, db) => {
         // Mongo Collection "Films" --->
         // fs.writeFileSync('../test-json-result.json', JSON.stringify(films));
         createDBCollection('films', films, db);
-        // console.log('Done.');
+        console.log('Done.');
         return;
     }
 
@@ -296,7 +296,7 @@ const populatePeople = (people, currentIndex, db) => {
         // Mongo Collection "People" --->
         // fs.writeFileSync('../test-json-result.json', JSON.stringify(people));
         createDBCollection('people', people, db);
-        // console.log('Done.');
+        console.log('Done.');
         return;
     }
 
@@ -332,7 +332,7 @@ const populateSpecies = (species, currentIndex, db) => {
         // fs.writeFileSync('../test-json-result.json',
         // JSON.stringify(species));
         createDBCollection('species', species, db);
-        // console.log('Done.');
+        console.log('Done.');
         return;
     }
 
@@ -366,7 +366,7 @@ const populateVehicles = (vehicles, currentIndex, db) => {
         // fs.writeFileSync('../test-json-result.json',
         // JSON.stringify(vehicles));
         createDBCollection('vehicles', vehicles, db);
-        // console.log('Done.');
+        console.log('Done.');
         return;
     }
 
@@ -409,7 +409,7 @@ const generateLocationsSeed = (db) => {
             // fs.writeFileSync('../test-json-result.json',
             //     JSON.stringify(res));
             createDBCollection('locations', res, db);
-            // console.log('Done.');
+            console.log('Done.');
         });
 };
 
@@ -432,19 +432,29 @@ const generateVehiclesSeed = (db) => {
 };
 
 const seed = (db) => {
-    // uncomment each, wait 20-30 sec, get seed data
-    return () => {
-        // generateFilmsSeed(db);
-        // console.log('Seeding films...');
-        // generateLocationsSeed(db);
-        // console.log('Seeding locations...');
-        // generatePeopleSeed(db);
-        // console.log('Seeding people...');
-        // generateSpeciesSeed(db);
-        // console.log('Seeding species...');
-        // generateVehiclesSeed(db);
-        // console.log('Seeding vehicles...');
+    // for seed after deploy on Ubuntu server
+    return {
+        db,
+        generateFilmsSeed,
+        generateLocationsSeed,
+        generatePeopleSeed,
+        generateSpeciesSeed,
+        generateVehiclesSeed,
     };
+
+    // uncomment each, wait 20-30 sec, get seed data
+    // return () => {
+    //     // generateFilmsSeed(db);
+    //     // console.log('Seeding films...');
+    //     // generateLocationsSeed(db);
+    //     // console.log('Seeding locations...');
+    //     // generatePeopleSeed(db);
+    //     // console.log('Seeding people...');
+    //     // generateSpeciesSeed(db);
+    //     // console.log('Seeding species...');
+    //     // generateVehiclesSeed(db);
+    //     // console.log('Seeding vehicles...');
+    // };
 };
 
 module.exports = seed;
