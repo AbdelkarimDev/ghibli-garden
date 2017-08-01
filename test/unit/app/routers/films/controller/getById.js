@@ -34,7 +34,7 @@ describe('films controller', () => {
         res = require('../../../../req-res').getResponseMock();
     });
 
-    it('expect get all to return films', () => {
+    it('expect get by id to return film', () => {
         return controller.getById(req, res)
             .then(() => {
                 expect(res.context).to.be.deep.equal({
