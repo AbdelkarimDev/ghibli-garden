@@ -3,7 +3,7 @@ const { setupDriver } = require('../utils/setup-driver');
 const ui = require('../utils/ui');
 const async = require('../../../utils/async');
 
-describe('Register tests', () => {
+describe.skip('Register tests', () => {
     let driver = null;
 
     const appUrl = 'http://localhost:3002';

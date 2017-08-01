@@ -67,7 +67,7 @@ gulp.task('tests:browser', ['test-server:start'], () => {
     ])
         .pipe(mocha({
             reporter: 'nyan',
-            timeout: 10000,
+            timeout: 15000,
         }))
         .once('end', () => {
             gulp.start('test-server:stop');
