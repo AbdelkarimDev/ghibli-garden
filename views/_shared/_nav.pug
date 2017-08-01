@@ -34,7 +34,7 @@ mixin nav()
                             a(href='/auth/sign-out') Logout, #{user.name}
                     else
                         li.list-item
-                            a(href='/auth/sign-up') Register
+                            a(href='/auth/sign-up', id="sign-up") Register
                         li.list-item
                             a(href='/auth/sign-in') Login
 

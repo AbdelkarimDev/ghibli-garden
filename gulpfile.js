@@ -62,7 +62,9 @@ gulp.task('test-server:stop', () => {
 });
 
 gulp.task('tests:browser', ['test-server:start'], () => {
-    return gulp.src('./test/browser/navigation/nav-tests.js')
+    return gulp.src([
+        './test/browser/**/*.js',
+    ])
         .pipe(mocha({
             reporter: 'nyan',
             timeout: 10000,
