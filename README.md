@@ -4,6 +4,8 @@ Telerik Academy Project, Node.js course
 
 [Site in AWS](http://ec2-52-14-146-37.us-east-2.compute.amazonaws.com:3001/) 
 
+[Demo video](https://www.youtube.com/watch?v=VRatF5NswlE&feature=youtu.be) 
+
  #### Setup
  
  - npm install
