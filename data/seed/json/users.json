@@ -1,0 +1,14 @@
+{ 
+    "_id" : ObjectId("597ac2a0c3b97605f80d5cee"), 
+    "name" : "Nikolai", 
+    "email" : "ndvalkov@abv.bg", 
+    "username" : "niko23", 
+    "password" : "$2a$10$XS3ZKcS/ZjrdDdPaH5wb2uCqLP9yy/iEH3cighJY4KQz1LK/U0PFu"
+}
+{ 
+    "_id" : ObjectId("597ac612eeb1280640f2c11b"), 
+    "name" : "Divane", 
+    "email" : "ndvaleekov@abv.bg", 
+    "username" : "Stavri", 
+    "password" : "$2a$10$j0XxEST4cx2YWuAfwbxs/eo07Cq1CGX0G.Fsg9d6NinKPJ6SNKZpO"
+}

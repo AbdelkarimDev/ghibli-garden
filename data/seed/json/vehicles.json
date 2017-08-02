@@ -1,0 +1,72 @@
+{ 
+    "_id" : ObjectId("5979caccee8e85160895f5f8"), 
+    "name" : "Air Destroyer Goliath", 
+    "description" : "A military airship utilized by the government to access Laputa", 
+    "vehicle_class" : "Airship", 
+    "length" : "1,000", 
+    "pilot" : {
+        "name" : "Colonel Muska", 
+        "gender" : "Male", 
+        "age" : "33", 
+        "eye_color" : "Grey", 
+        "hair_color" : "Brown", 
+        "url" : ""
+    }, 
+    "films" : {
+        "title" : "Castle in the Sky", 
+        "description" : "The orphan Sheeta inherited a mysterious crystal that links her to the mythical sky-kingdom of Laputa. With the help of resourceful Pazu and a rollicking band of sky pirates, she makes her way to the ruins of the once-great civilization. Sheeta and Pazu must outwit the evil Muska, who plans to use Laputa's science to make himself ruler of the world.", 
+        "director" : "Hayao Miyazaki", 
+        "producer" : "Isao Takahata", 
+        "release_date" : "1986", 
+        "url" : ""
+    }, 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979caccee8e85160895f5f9"), 
+    "name" : "Red Wing", 
+    "description" : "An experimental aircraft captured by Porco. Named Savoia S.21", 
+    "vehicle_class" : "Airplane", 
+    "length" : "20", 
+    "pilot" : {
+        "name" : "Porco Rosso", 
+        "gender" : "Male", 
+        "age" : "47", 
+        "eye_color" : "Black", 
+        "hair_color" : "Brown", 
+        "url" : ""
+    }, 
+    "films" : {
+        "title" : "Porco Rosso", 
+        "description" : "Porco Rosso, known in Japan as Crimson Pig (Kurenai no Buta) is the sixth animated film by Hayao Miyazaki and released in 1992. You're introduced to an Italian World War I fighter ace, now living as a freelance bounty hunter chasing 'air pirates' in the Adriatic Sea. He has been given a curse that changed his head to that of a pig. Once called Marco Pagot, he is now known to the world as 'Porco Rosso', Italian for 'Red Pig.'", 
+        "director" : "Hayao Miyazaki", 
+        "producer" : "Toshio Suzuki", 
+        "release_date" : "1992", 
+        "url" : ""
+    }, 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979caccee8e85160895f5fa"), 
+    "name" : "Sosuke's Boat", 
+    "description" : "A toy boat where Sosuke plays", 
+    "vehicle_class" : "Boat", 
+    "length" : "10", 
+    "pilot" : {
+        "name" : "Sosuke", 
+        "gender" : "Male", 
+        "age" : "5", 
+        "eye_color" : "Brown", 
+        "hair_color" : "Brown", 
+        "url" : ""
+    }, 
+    "films" : {
+        "title" : "Ponyo", 
+        "description" : "The son of a sailor, 5-year old Sosuke lives a quiet life on an oceanside cliff with his mother Lisa. One fateful day, he finds a beautiful goldfish trapped in a bottle on the beach and upon rescuing her, names her Ponyo. But she is no ordinary goldfish. The daughter of a masterful wizard and a sea goddess, Ponyo uses her father's magic to transform herself into a young girl and quickly falls in love with Sosuke, but the use of such powerful sorcery causes a dangerous imbalance in the world. As the moon steadily draws nearer to the earth and Ponyo's father sends the ocean's mighty waves to find his daughter, the two children embark on an adventure of a lifetime to save the world and fulfill Ponyo's dreams of becoming human.", 
+        "director" : "Hayao Miyazaki", 
+        "producer" : "Toshio Suzuki", 
+        "release_date" : "2008", 
+        "url" : ""
+    }, 
+    "url" : ""
+}

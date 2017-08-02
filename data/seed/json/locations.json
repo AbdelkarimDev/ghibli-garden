@@ -1,0 +1,200 @@
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b1021446e"), 
+    "name" : "Irontown", 
+    "climate" : "Continental", 
+    "terrain" : "Mountain", 
+    "surface_water" : "40", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b1021446f"), 
+    "name" : "Gutiokipanja", 
+    "climate" : "Continental", 
+    "terrain" : "Hill", 
+    "surface_water" : "50", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b10214470"), 
+    "name" : "The Cat Kingdom", 
+    "climate" : "Continental", 
+    "terrain" : "Plain", 
+    "surface_water" : "30", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b10214471"), 
+    "name" : "The Marsh House", 
+    "climate" : "Mild", 
+    "terrain" : "Marsh", 
+    "surface_water" : "60", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b10214472"), 
+    "name" : "Taeko's House", 
+    "climate" : "", 
+    "terrain" : "", 
+    "surface_water" : "", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b10214473"), 
+    "name" : "Hospital", 
+    "climate" : "Continental", 
+    "terrain" : "Hill", 
+    "surface_water" : "40", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b10214474"), 
+    "name" : "Gondoa", 
+    "climate" : "TODO", 
+    "terrain" : "TODO", 
+    "surface_water" : "40", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b10214475"), 
+    "name" : "Ursula's Log Cabin", 
+    "climate" : "TODO", 
+    "terrain" : "TODO", 
+    "surface_water" : "40", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b10214476"), 
+    "name" : "Zeniba's Cottage", 
+    "climate" : "TODO", 
+    "terrain" : "TODO", 
+    "surface_water" : "40", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b10214477"), 
+    "name" : "Bamboo Forest", 
+    "climate" : "Tropical", 
+    "terrain" : "Forest", 
+    "surface_water" : "10", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b10214478"), 
+    "name" : "Pazu's Mines", 
+    "climate" : "Dry", 
+    "terrain" : "Hill", 
+    "surface_water" : "0", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b10214479"), 
+    "name" : "Shizuku's Apartment", 
+    "climate" : "Continental", 
+    "terrain" : "City", 
+    "surface_water" : "0", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b1021447a"), 
+    "name" : "Laputa", 
+    "climate" : "Continental", 
+    "terrain" : "City", 
+    "surface_water" : "40", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b1021447b"), 
+    "name" : "Tedis", 
+    "climate" : "Continental", 
+    "terrain" : "Hill", 
+    "surface_water" : "30", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b1021447c"), 
+    "name" : "Koriko", 
+    "climate" : "Mild", 
+    "terrain" : "Hill", 
+    "surface_water" : "50", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b1021447d"), 
+    "name" : "Forest", 
+    "climate" : "Tropical", 
+    "terrain" : "Forest", 
+    "surface_water" : "60", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b1021447e"), 
+    "name" : "Bathhouse", 
+    "climate" : "Continental", 
+    "terrain" : "River", 
+    "surface_water" : "70", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b1021447f"), 
+    "name" : "Matsugo", 
+    "climate" : "Continental", 
+    "terrain" : "River", 
+    "surface_water" : "60", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b10214480"), 
+    "name" : "Taeko's House", 
+    "climate" : "Continental", 
+    "terrain" : "River", 
+    "surface_water" : "40", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b10214481"), 
+    "name" : "Piccolo S.P.A.", 
+    "climate" : "Continental", 
+    "terrain" : "River", 
+    "surface_water" : "40", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b10214482"), 
+    "name" : "Karikiya", 
+    "climate" : "Mild", 
+    "terrain" : "City", 
+    "surface_water" : "30", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b10214483"), 
+    "name" : "Satsuki's School House", 
+    "climate" : "Mild", 
+    "terrain" : "River", 
+    "surface_water" : "60", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b10214484"), 
+    "name" : "Fujimoto's Underwater Harbor", 
+    "climate" : "Wet", 
+    "terrain" : "Ocean", 
+    "surface_water" : "100", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b10214485"), 
+    "name" : "Himawari Nursery School", 
+    "climate" : "Mild", 
+    "terrain" : "Ocean", 
+    "surface_water" : "50", 
+    "url" : ""
+}
+{ 
+    "_id" : ObjectId("5979c6548f4bba3b10214486"), 
+    "name" : "Ingary", 
+    "climate" : "Mild", 
+    "terrain" : "Hill", 
+    "surface_water" : "30", 
+    "url" : ""
+}

@@ -295,7 +295,7 @@ const populatePeople = (people, currentIndex, db) => {
         people = people.map(trimMainPeopleJSON);
         // Mongo Collection "People" --->
         // fs.writeFileSync('../test-json-result.json', JSON.stringify(people));
-        createDBCollection('people', people, db);
+        createDBCollection('persons', people, db);
         console.log('Done.');
         return;
     }

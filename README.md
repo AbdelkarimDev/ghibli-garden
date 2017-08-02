@@ -2,12 +2,38 @@ Telerik Academy Project, Node.js course
  
 [Studio Ghibli](https://en.wikipedia.org/wiki/Studio_Ghibli) community web site
 
-##  Description:
-_Web applications with Node.js_
+[Site in AWS](http://ec2-52-14-146-37.us-east-2.compute.amazonaws.com:3001/) 
 
-This document describes the **course project assignment** for the [Web applications with Node.js course](telerikacademy.com/courses/courses/Details/438) at Telerik Academy.
+ #### Setup
+ 
+ - npm install
+ - start MongoDB server
+ - npm start
 
-## Project Description
+ #### Notes
+ 
+ - For the database you can use the files in /seed/json to import the MongoDB collections manually, or,
+ use the seed.js module to fetch all the data from the Ghibli [API](https://ghibliapi.herokuapp.com/)
+ and generate the db collections.
+ 
+ #### Public dynamic pages
+Users and registration related, plus:
+* `#/films` - all films
+* `#/people` - all film characters
+* `#/locations` - all locations
+* `#/species` - all species
+* `#/vehicles` - all vehicles
+* `#/{all the above}/:id` - Detailed info about a single entity
+* `#/chat` - simple chat with Socket.io
+#### Private (registered user) dynamic pages
+* `#/films/:id/comment` - leave a comment under a film
+* `#/films/:id/rate` - rate a film
+#### RESTful API routes
+* `#/api/{entities}/:id/{subentities}`
+* `#/api/films/?res={n}` - limit results
+* `#/api/comments` - auth, jwt, `/api/login` with Pesho Pesho to get token
+
+## Course Project Description
 
 Design and implement a **Standard Web application** using [Node.js](http://nodejs.org), [Express](expressjs.com) and [MongoDB](https://www.mongodb.com/).  
 
