@@ -2,8 +2,6 @@ Telerik Academy Project, Node.js course
  
 [Studio Ghibli](https://en.wikipedia.org/wiki/Studio_Ghibli) community web site
 
-[Site in AWS](http://ec2-52-14-146-37.us-east-2.compute.amazonaws.com:3001/) 
-
 [Demo video](https://www.youtube.com/watch?v=VRatF5NswlE&feature=youtu.be) 
 
  #### Setup
